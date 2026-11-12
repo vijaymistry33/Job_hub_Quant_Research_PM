@@ -1404,7 +1404,7 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
 .mm-err{color:var(--loss);font-size:15px;min-height:1.2em;margin:4px 0}
 .mm-hist{max-width:52rem;margin-top:10px}
 /* CV kit and trading record */
-.cv-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:26px;align-items:start;margin-top:10px}
+.cv-wrap{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:26px;align-items:start;margin-top:10px}
 .cv-ed h2{font-size:18px;margin:18px 0 6px}
 .cv-in{display:block;width:100%;font:inherit;font-size:15.5px;line-height:1.5;padding:9px 11px;border:1px solid var(--rule);border-radius:10px;background:var(--sheet);color:var(--ink);margin:0 0 8px;resize:vertical}
 .cv-fs{margin:0 0 14px;padding:8px 12px 10px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet)}
@@ -1416,6 +1416,13 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
 .cv-tags{grid-column:3;font-size:12.5px;color:var(--muted);letter-spacing:.02em}
 .cv-b.is-check .cv-tags{color:var(--marigold-ink);font-weight:600}
 .cv-pv{position:sticky;top:12px}
+.cvt{margin:0 0 16px;padding:12px 14px 6px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet)}
+.cvt h2{font-size:18px;margin:0 0 4px}
+.cvt-two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cvt-rep{margin:0 0 14px}
+.cvt-lines{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:6px}
+.chip-job{font-weight:600}
+@media (max-width:560px){ .cvt-two{grid-template-columns:1fr} }
 .cv-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
 .cv-checks ul{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:6px}
 .cv-ck{padding:8px 12px;border-radius:10px;font-size:14.5px;border-left:3px solid var(--rule)}
@@ -1423,22 +1430,28 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
 .cv-ck.is-check{border-left-color:var(--marigold);background:var(--marigold-wash)}
 .cv-ck.is-info{border-left-color:var(--focus);background:var(--focus-wash)}
 .cv-ck.is-ok{border-left-color:var(--gain);background:var(--gain-wash)}
-.cv-sheet-box{max-height:78vh;overflow:auto;border:1px solid var(--rule);border-radius:12px;background:#fff}
-.cv-sheet{padding:30px 34px;color:#1a1f24;background:#fff;font-family:Calibri,'Segoe UI',Arial,sans-serif;font-size:10.5pt;line-height:1.38}
-.cv-sheet h1{font-size:20pt;margin:0;color:#111}
-.cv-sheet .cv-head{margin:2px 0 4px;font-weight:600;color:#1d4f5c}
-.cv-sheet .cv-contact{margin:0;font-size:9.5pt;color:#444}
-.cv-sheet h2{margin:14px 0 4px;padding-bottom:2px;border-bottom:1px solid #9aa9b0;font-size:10.5pt;letter-spacing:.06em;text-transform:uppercase;color:#1d4f5c}
-.cv-sheet .cv-role{display:flex;justify-content:space-between;gap:10px;margin-top:8px}
-.cv-sheet .cv-role span{white-space:nowrap;color:#444}
-.cv-sheet .cv-sub{margin:0 0 2px;font-size:9.5pt;color:#555;font-style:italic}
-.cv-sheet ul{margin:2px 0 0;padding-left:1.1em}
-.cv-sheet li{margin:1px 0}
-.cv-sheet li.is-sub{margin-left:1.1em;list-style:'– '}
-.cv-sheet .cv-sum{margin:0}
-.cv-skills{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:3px 10px;margin:4px 0 0}
-.cv-skills dt{font-weight:700;font-size:9.5pt;text-transform:uppercase;letter-spacing:.03em}
-.cv-skills dd{margin:0}
+.cv-sheet-box{max-height:82vh;overflow:auto;border:1px solid var(--rule);border-radius:12px;background:#dfe4e2;padding:10px 0}
+/* CV sheet = your master CV (apply/template/Vijay_Mistry_CV_Master.docx): Calibri, black, 19pt name, letter-spaced headings over a thin rule */
+.cv-sheet{box-sizing:border-box;width:210mm;min-height:297mm;margin:0 auto;padding:11.4mm 14mm;box-shadow:0 1px 6px rgba(0,0,0,.18);background-image:linear-gradient(#b9c2c6,#b9c2c6);background-repeat:no-repeat;background-size:100% 1px;background-position:0 285.6mm;color:#000;background-color:#fff;font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif;font-size:10pt;line-height:1.22}
+.cv-sheet h1{font-size:19pt;font-weight:700;margin:0 0 1.5pt;color:#000;line-height:1.15}
+.cv-sheet .cv-head{margin:0;font-size:9.5pt;font-weight:400;color:#000}
+.cv-sheet .cv-contact{margin:0;font-size:9.5pt;color:#000}
+.cv-sheet a{color:#366A91;text-decoration:none}
+.cv-sheet h2{margin:9.5pt 0 3.5pt;padding-bottom:1pt;border-bottom:.75pt solid #1A1A1A;font-size:9.5pt;font-weight:700;letter-spacing:2.5pt;text-transform:uppercase;color:#000;break-after:avoid}
+.cv-sheet h2.cv-h-first{margin-top:8pt}
+.cv-sheet .cv-role{display:flex;justify-content:space-between;gap:10px;margin-top:6.5pt;break-after:avoid}
+.cv-sheet h2 + .cv-role{margin-top:2pt}
+.cv-sheet .cv-role b{font-size:10.5pt}
+.cv-sheet .cv-role span{white-space:nowrap;color:#000;font-size:10pt}
+.cv-sheet .cv-sub{margin:0 0 2pt;font-size:9.5pt;color:#333;font-style:normal}
+.cv-sheet ul{margin:0;padding-left:12.5pt;list-style:'•  '}
+.cv-sheet li{margin:0 0 .6pt;text-align:justify;padding-left:0}
+.cv-sheet li::marker{font-size:10pt}
+.cv-sheet li.is-sub{margin-left:17.5pt;list-style:'–  '}
+.cv-sheet .cv-sum{margin:0;text-align:justify}
+.cv-skills{display:grid;grid-template-columns:39.4mm minmax(0,1fr);gap:2.25pt 0;margin:0}
+.cv-skills dt{font-weight:700;font-size:8.5pt;text-transform:uppercase;letter-spacing:.5pt;line-height:1.45}
+.cv-skills dd{margin:0;font-size:9.5pt}
 .rec-form{display:flex;flex-direction:column;gap:10px}
 .rec-f{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
 .rec-f .cv-in{font-weight:400;color:var(--ink);margin:0}
@@ -1446,9 +1459,8 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
 .rec-qs{max-width:52rem;margin-top:30px}
 .pitch-script{white-space:pre-wrap;font-family:var(--font-read);font-size:16px;line-height:1.55;padding:14px 16px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet);margin:0 0 10px;min-height:8rem}
 @media (max-width:900px){
-  .cv-wrap{grid-template-columns:1fr}
+  .cv-wrap{grid-template-columns:minmax(0,1fr)}
   .cv-pv{position:static}
-  .cv-sheet{padding:18px 16px}
   .tl-dl{grid-template-columns:1fr;gap:2px}
   .tl-dl dd{margin-bottom:8px}
 }
@@ -1459,12 +1471,13 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
   .cv-skills{grid-template-columns:1fr}
 }
 @media print{
-  body.print-cv > *:not(.shell),body.print-cv .shell > *:not(main),body.print-cv main > *:not(.page.is-active),body.print-cv .page.is-active > div > *:not(.cv-wrap),body.print-cv .cv-wrap > .cv-ed,body.print-cv .cv-acts,body.print-cv .cv-checks{display:none !important}
+  body.print-cv > *:not(.shell),body.print-cv .shell > *:not(main),body.print-cv main > *:not(.page.is-active),body.print-cv .page.is-active > div > *:not(.cv-wrap),body.print-cv .cv-wrap > .cv-ed,body.print-cv .cv-acts,body.print-cv .cv-checks,body.print-cv .cv-pv > *:not(.cv-sheet-box){display:none !important}
   body.print-cv .cv-wrap{display:block;margin:0}
   body.print-cv .cv-sheet-box{max-height:none;overflow:visible;border:0}
-  body.print-cv .cv-sheet{padding:0}
+  body.print-cv .cv-sheet{padding:0;width:auto;min-height:0;zoom:1 !important;box-shadow:none;background-image:none}
+  body.print-cv .cv-sheet-box{padding:0;background:#fff}
   body.print-cv{background:#fff}
-  @page{size:A4;margin:14mm 15mm}
+  @page{size:A4;margin:11.4mm 14mm 11.4mm;@bottom-center{content:'Vijay Mistry \00B7  page ' counter(page) ' of ' counter(pages);font:7pt Calibri,Carlito,sans-serif;color:#8A8F98}}
 }
 
 @media print{
@@ -1564,7 +1577,7 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
     </section>
 
     <section class="page" id="page-jobs" data-route="jobs" aria-labelledby="h-jobs">
-      <header class="page-head"><h1 id="h-jobs" tabindex="-1">Jobs</h1><p>Open roles at your target companies in India, Europe, Singapore and Canada: product, equity research and options trading roles first, then other trading and markets roles where your experience is the edge, open-door roles with broad hiring criteria, and AI-native builder roles. Use the search and filters to narrow the list.</p></header>
+      <header class="page-head"><h1 id="h-jobs" tabindex="-1">Jobs</h1><p>Open roles at your target companies in India, Europe, Singapore and Canada: product, equity research and options trading roles first, then other trading and markets roles where your experience is the edge, open-door roles with broad hiring criteria, AI-native builder roles, and internships and trainee roles in India. Use the search and filters to narrow the list.</p></header>
       <div id="jobs-body"></div>
     </section>
 
@@ -1616,7 +1629,7 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
         </section>
         <section>
           <h2>Start over</h2>
-          <p id="reset-note">Clears all saved progress in this browser, and in the automatic backup file if it’s on. A copy is kept under Automatic backups first, so you can undo it.</p>
+          <p id="reset-note">Clears all saved progress in this browser, and in the automatic backup file if it’s on. A copy is kept under Automatic backups first, so you can undo it. Your plan then restarts from that day: setup first, and Week 1 on the next Monday.</p>
           <button class="btn btn-danger" type="button" id="do-reset">Clear all progress</button>
           <p class="status-msg" id="reset-msg" role="status"></p>
         </section>
@@ -6379,7 +6392,7 @@ var IS_CLOUD = !!(window.claude && typeof window.claude.use === 'function');
 // Everywhere else (the file on your PC, and the copy on GitHub Pages for your phone) the hub syncs through your own
 // Supabase project. Each device needs the sync code once: the PC reads it from sync-config.js, the phone from the link.
 var IS_FILE = location.protocol === 'file:' || !!(window.HUB_SYNC && window.HUB_SYNC.pc);
-var PAGES_URL = 'https://vijaymistry33.github.io/pm-training-hub/';
+var PAGES_URL = 'https://vijaymistry33.github.io/Job_hub_Quant_Research_PM/';
 var SB = {url:'https://zimroeyqnoudjuyfpeij.supabase.co', anon:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppbXJvZXlxbm91ZGp1eWZwZWlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyNTY0ODIsImV4cCI6MjEwNzgzMjQ4Mn0.zEFuxHcQ1Vzey9nzaEfBA-HPPNToLnZE4LODJwXcvU4', key:null};
 (function(){
   var k = window.HUB_SYNC && window.HUB_SYNC.key;
@@ -6398,7 +6411,7 @@ var CLOUD = {mode: IS_CLOUD ? 'claude' : (SB.key ? 'supabase' : null), state: (I
 var KEY = 'pmhub.v1.state';
 var store = null;
 try { var ls = window.localStorage; ls.setItem('pmhub.v1.probe','1'); ls.removeItem('pmhub.v1.probe'); store = ls; } catch(e){ store = null; }
-function blank(){ return {v:1, days:{}, checks:{}, log:{}, scores:{}, apps:[], notes:{}, hrs:{}, settings:{weekdayStart:'16:30', weekendStart:'10:00', theme:'auto'}, lastBackup:null, autoAt:null, qb:{}, pages:{}, er:{}, people:[], pitch:{}, prep:{}, cvbank:null, updated:null}; }
+function blank(){ return {v:1, days:{}, checks:{}, log:{}, scores:{}, apps:[], notes:{}, hrs:{}, settings:{weekdayStart:'16:30', weekendStart:'10:00', theme:'auto'}, lastBackup:null, autoAt:null, qb:{}, pages:{}, er:{}, people:[], pitch:{}, prep:{}, cvbank:null, start:null, updated:null}; }
 function merge(p){
   var b = blank();
   if (!p || typeof p !== 'object') return b;
@@ -6440,6 +6453,90 @@ function clock(m){ m = ((m % 1440) + 1440) % 1440; var h = Math.floor(m/60), mm 
 function clockShort(m){ m = ((m % 1440) + 1440) % 1440; var h = Math.floor(m/60), mm = m % 60; return (h % 12 || 12) + ':' + pad(mm); }
 function startMinutes(iso){ var wd = parseIso(iso).getDay(); var s = (wd === 0 || wd === 6) ? S.settings.weekendStart : S.settings.weekdayStart; var p = (s || '16:30').split(':'); return +p[0]*60 + +(p[1]||0); }
 
+/* ---------- schedule start (moves when you clear all progress) ---------- */
+// The program's dates as built. Clearing all progress sets S.start to that day: setup runs from that day, any days
+// left before the next Monday become buffer days, and Week 1 starts on that Monday, so weekend sessions stay on weekends.
+var CANON = {days: DAYS.map(function(d){ return {iso:d.iso, label:d.label, week:d.week, segs:d.segs.slice(), routine:d.routine}; }), byIso:{}, weeks:{}, setup:null};
+CANON.days.forEach(function(d){ CANON.byIso[d.iso] = d; });
+WEEKS.forEach(function(w){ CANON.weeks[w.id] = {start:w.start, end:w.end, dates:w.dates}; if (w.part === 'setup' && !CANON.setup) CANON.setup = w.id; });
+var BUFFER_SEGS = ['<b>Buffer day</b> before Week 1: finish anything left from setup', '<b>Job search</b> work through the Jobs page: track roles, apply, and send referral requests'];
+var SCHED_KEY = null;
+function setupName(){ var w = WEEK[CANON.setup]; return w && parseIso(w.start).getDay() === 6 && daysBetween(w.start, w.end) === 1 ? 'Setup weekend' : 'Setup'; }
+function dayLabel(iso){ var d = parseIso(iso); return WD[d.getDay()].slice(0,3) + ' ' + MONTHS[d.getMonth()].slice(0,3) + ' ' + d.getDate(); }
+function rangeText(a, b){ var A = parseIso(a), B = parseIso(b), m = MONTHS[A.getMonth()].slice(0,3) + ' ' + A.getDate(); if (a === b) return m; return m + '–' + (A.getMonth() === B.getMonth() ? '' : MONTHS[B.getMonth()].slice(0,3) + ' ') + B.getDate(); }
+function schedulePlan(start){
+  if (!start) return null;
+  var setup = CANON.days.filter(function(d){ return d.week === CANON.setup; }), main = CANON.days.filter(function(d){ return d.week !== CANON.setup; });
+  var gap = ((8 - parseIso(start).getDay()) % 7) || 7, mon = addDays(start, gap);   // the first Monday after the start day
+  var P = {map:{}, merged:{}, buffers:[], start:start, mon:mon, delta: daysBetween(main[0].iso, mon)};
+  setup.forEach(function(d, i){
+    if (i < gap) P.map[d.iso] = addDays(start, i);
+    else { var into = setup[gap - 1].iso; P.map[d.iso] = null; (P.merged[into] = P.merged[into] || []).push(d.iso); }   // a Sunday start folds setup into one day
+  });
+  for (var k = setup.length; k < gap; k++) P.buffers.push(addDays(start, k));
+  main.forEach(function(d){ P.map[d.iso] = addDays(d.iso, P.delta); });
+  return P;
+}
+function applySchedule(){
+  var start = (S && S.start && /^\d{4}-\d{2}-\d{2}$/.test(S.start)) ? S.start : null;
+  if (start === SCHED_KEY) return;
+  var P = schedulePlan(start), list = [];
+  CANON.days.forEach(function(c){
+    var iso = P ? P.map[c.iso] : c.iso;
+    if (!iso) return;
+    var segs = c.segs.slice();
+    if (P && P.merged[c.iso]) P.merged[c.iso].forEach(function(src){ segs = segs.concat(CANON.byIso[src].segs); });
+    list.push({iso:iso, label: P ? dayLabel(iso) : c.label, week:c.week, segs:segs, routine:c.routine});
+  });
+  if (P) P.buffers.forEach(function(iso){ list.push({iso:iso, label:dayLabel(iso), week:CANON.setup, segs:BUFFER_SEGS.map(function(x){ return x.replace(/<[^>]+>/g, ''); }), routine:null, buffer:true}); });
+  list.sort(function(a, b){ return a.iso < b.iso ? -1 : a.iso > b.iso ? 1 : 0; });
+  DAYS.length = 0; list.forEach(function(d){ DAYS.push(d); });
+  Object.keys(DAY).forEach(function(k){ delete DAY[k]; });
+  DAYS.forEach(function(d, i){ d.idx = i; DAY[d.iso] = d; });
+  WEEKS.forEach(function(w){
+    var c = CANON.weeks[w.id];
+    if (!P) { w.start = c.start; w.end = c.end; w.dates = c.dates; }
+    else if (w.id === CANON.setup) { w.start = start; w.end = addDays(P.mon, -1); w.dates = rangeText(w.start, w.end); }
+    else { w.start = addDays(c.start, P.delta); w.end = addDays(c.end, P.delta); w.dates = rangeText(w.start, w.end); }
+  });
+  /* the day lists on the Daily schedule and Interview sprint pages */
+  document.querySelectorAll('li.day-buffer, .seg-merged').forEach(function(n){ n.parentNode.removeChild(n); });
+  var lis = document.querySelectorAll('li.day, li.day-off');
+  lis.forEach(function(li){ if (!li.hasAttribute('data-day0')) li.setAttribute('data-day0', li.getAttribute('data-day')); });
+  var last = null;
+  lis.forEach(function(li){
+    var c = li.getAttribute('data-day0'), iso = P ? P.map[c] : c;
+    if (!iso) { li.classList.remove('day'); li.classList.add('day-off'); li.hidden = true; return; }
+    li.classList.remove('day-off'); li.classList.add('day'); li.hidden = false;
+    li.setAttribute('data-day', iso); li.id = 'day-' + iso;
+    var inp = li.querySelector('input.tick'); if (inp) inp.setAttribute('data-day', iso);
+    var dd = li.querySelector('.d-date'); if (dd) dd.textContent = P ? dayLabel(iso) : CANON.byIso[c].label;
+    if (P && P.merged[c]) P.merged[c].forEach(function(src){
+      var sl = document.querySelector('li[data-day0="' + src + '"] .d-segs'), tg = li.querySelector('.d-segs');
+      if (sl && tg) Array.prototype.forEach.call(sl.children, function(x){ var y = x.cloneNode(true); y.classList.add('seg-merged'); tg.appendChild(y); });
+    });
+    if (CANON.byIso[c] && CANON.byIso[c].week === CANON.setup) last = li;
+  });
+  if (P && last) {
+    var after = last;
+    P.buffers.forEach(function(iso){
+      var segs = el('span', {class:'d-segs'}); BUFFER_SEGS.forEach(function(x){ var sp = document.createElement('span'); sp.innerHTML = x; segs.appendChild(sp); });
+      var li = el('li', {class:'day day-buffer', 'data-day':iso, id:'day-' + iso}, [el('label', {}, [el('input', {class:'tick', type:'checkbox', 'data-day':iso}), el('span', {class:'d-date', text:dayLabel(iso)}), segs])]);
+      after.parentNode.insertBefore(li, after.nextSibling); after = li;
+    });
+  }
+  /* week headings that carry dates */
+  document.querySelectorAll('.page[data-route="daily"] h2, .page[data-route="daily"] h3, .page[data-route="sprint"] h2, .page[data-route="sprint"] h3').forEach(function(h){
+    var t0 = h.getAttribute('data-t0'); if (t0 === null) { t0 = h.textContent; h.setAttribute('data-t0', t0); }
+    var t = t0;
+    WEEKS.forEach(function(w){ var c = CANON.weeks[w.id]; if (c.dates && t0.indexOf(' · ' + c.dates) >= 0) t = t0.replace(' · ' + c.dates, ' · ' + w.dates); });
+    if (h.textContent !== t) h.textContent = t;
+  });
+  if (typeof PLAN_MEMO !== 'undefined') PLAN_MEMO.key = null;
+  SCHED_KEY = start;
+}
+applySchedule();
+
 /* ---------- helpers ---------- */
 function el(tag, attrs, kids){
   var n = document.createElement(tag);
@@ -6459,7 +6556,7 @@ function clear(n){ while (n.firstChild) n.removeChild(n.firstChild); return n; }
 function isDone(iso){ return !!S.days[iso]; }
 function cap(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 function dur(m){ if (m < 60) return m + ' min'; var h = Math.floor(m/60), r = m % 60; return h + ' h' + (r ? ' ' + r + ' min' : ''); }
-function isRest(d){ return /rest day/i.test(d.segs.join(' ')); }
+function isRest(d){ return !!d.buffer || /rest day/i.test(d.segs.join(' ')); }
 function splitSeg(s){ var m = /^([A-Z][A-Za-z]+(?: [a-z]+)?): (.*)$/.exec(s); return (m && m[1].length <= 12) ? {label:m[1], text:m[2]} : {label:'', text:s}; }
 function behind(){ var t = today(); return DAYS.filter(function(d){ return d.iso < t && !isDone(d.iso) && !isRest(d); }); }
 function counted(d){ return isDone(d.iso) || (isRest(d) && d.iso < today()); }
@@ -6514,13 +6611,14 @@ function setDone(iso, val){
   if (currentRoute === 'progress') renderProgress();
 }
 function syncDocs(){
+  applySchedule();
   var t = today();
   document.querySelectorAll('input.tick[data-day]').forEach(function(i){ i.checked = isDone(i.dataset.day); });
   document.querySelectorAll('li.day').forEach(function(li){
     var iso = li.dataset.day;
     li.classList.toggle('is-done', isDone(iso));
     li.classList.toggle('is-today', iso === t);
-    li.classList.toggle('is-behind', iso < t && !isDone(iso));
+    li.classList.toggle('is-behind', iso < t && !isDone(iso) && !li.classList.contains('day-buffer'));
   });
   document.querySelectorAll('input.tick[data-key]').forEach(function(i){ i.checked = !!S.checks[i.dataset.key]; });
   if (typeof qbSync === 'function') qbSync();
@@ -6710,7 +6808,7 @@ function renderToday(focus){
   var dayNo = DAYS.filter(function(x){ return x.week === w.id && x.iso <= iso; }).length;
   var weekDays = DAYS.filter(function(x){ return x.week === w.id; }).length;
   var where;
-  if (w.part === 'setup') where = [el('b', {text:'Setup weekend'}), ', day ' + dayNo + ' of ' + weekDays + '. The interview sprint starts on Monday 19 October.'];
+  if (w.part === 'setup') { var w1 = WEEKS.filter(function(x){ return x.part !== 'setup'; })[0]; where = [el('b', {text:setupName()}), ', day ' + dayNo + ' of ' + weekDays + '.' + (w1 ? ' The interview sprint starts on ' + WD[parseIso(w1.start).getDay()] + ' ' + longDate(w1.start) + '.' : '')]; }
   else if (w.part === 'sprint') where = [el('b', {text:'Interview sprint, week ' + w.num + ' of 4: '}), w.title, el('span', {class:'phase', text:'. Day ' + dayNo + ' of 7.'})];
   else where = [el('b', {text:'Week ' + w.num + ' of 14: '}), w.title, el('span', {class:'phase', text:'. Phase ' + w.phaseNum + ': ' + w.phase + '. Day ' + dayNo + ' of 7.'})];
   page.appendChild(el('p', {class:'where'}, where));
@@ -7084,7 +7182,7 @@ function renderBackup(){
     : 'Your ticks, logs, scores and applications are saved in this browser on this device only. Link it to your hub below so it shows the same record as your PC.';
   if (synced) {
     document.getElementById('dl-note').textContent = 'Saves everything to one small file. Your progress is already synced, so this is only an extra copy.';
-    document.getElementById('reset-note').textContent = 'Clears all progress here and in your hub account, so your PC and phone both start over. Download a backup first if you might want it back.';
+    document.getElementById('reset-note').textContent = 'Clears all progress here and in your hub account, so your PC and phone both start over, and your plan restarts from that day with Week 1 on the next Monday. Download a backup first if you might want it back.';
   }
   sync.appendChild(sbPanel());
   document.getElementById('auto-sec').hidden = !IS_FILE;
@@ -7117,8 +7215,9 @@ document.getElementById('do-reset').addEventListener('click', function(e){
   if (!b.dataset.arm) { b.dataset.arm = '1'; b.textContent = 'Click again to clear everything'; setTimeout(function(){ delete b.dataset.arm; b.textContent = 'Clear all progress'; }, 5000); return; }
   delete b.dataset.arm; b.textContent = 'Clear all progress'; b.disabled = true;
   bkSafety('before-reset').then(function(){
-    var theme = S.settings.theme; S = blank(); S.settings.theme = theme; QUIZ = null; CARDS = null; quizSave(); save(); syncDocs(); badges(); BK.list = null; renderBackup();
-    b.disabled = false; msg.textContent = 'All progress cleared.' + (bkOn() ? ' A copy is kept under Automatic backups if you change your mind.' : '');
+    var theme = S.settings.theme; S = blank(); S.settings.theme = theme; S.start = today(); QUIZ = null; CARDS = null; quizSave(); viewIso = null; save(); syncDocs(); badges(); BK.list = null; renderBackup();
+    var wk1 = WEEKS.filter(function(w){ return w.part !== 'setup'; })[0];
+    b.disabled = false; msg.textContent = 'All progress cleared. Your plan now starts today with setup' + (wk1 ? ', and Week 1 starts ' + shortDate(wk1.start) : '') + '.' + (bkOn() ? ' A copy is kept under Automatic backups if you change your mind.' : '');
   });
 });
 
@@ -7262,11 +7361,12 @@ var JOB_GROUPS = [
   {p:5, title:'Other fintech product roles', note:'Payments, banking and infrastructure. Worth a look, but lower on your list.'},
   {p:6, title:'Trading and markets roles where your experience is the edge', note:'Not product roles: trader, dealer, derivatives, market risk, surveillance, research and specialist roles at brokers, exchanges, crypto venues and trading firms. Here your live F&O trading experience is the main qualification, and the Cheat sheets explain how to pitch it (sheet 16). Roles marked “Long shot” are at elite trading firms that mostly hire from other trading desks.'},
   {p:7, title:'Open-door roles where your skills transfer', note:'Business and data analyst, operations, customer success, implementation, community, content and testing roles with broad hiring criteria. They ask for what you can already show, such as markets knowledge, data work, writing and the tools you’ve built, rather than a set degree or job title. They get you inside a target company, and product roles are an internal move away (Cheat sheets, sheet 17).'},
-  {p:8, title:'AI-native builder roles', note:'Forward-deployed, deployment-strategist, applied-AI, agent, solutions and automation roles at AI companies (OpenAI, Anthropic, Databricks, Palantir, Sierra, Decagon, Rogo, n8n, Sarvam and more) and at fintechs. You take an AI product into a customer’s real work, specify what to build, build it with AI tools and ship it, as you did with the Decision Console and Melange. Check the coding bar in each listing: “forward deployed engineer” roles usually expect you to write production code yourself, while deployment strategist, agent development and solutions roles lean on judgement, domain knowledge and specification. Rogo’s “Forward Deployed Banker” roles want finance experience above all. Roles at the AI labs are marked Long shot.'}];
-var REGIONS = ['India', 'Europe', 'Singapore', 'Canada'];
+  {p:8, title:'AI-native builder roles', note:'Forward-deployed, deployment-strategist, applied-AI, agent, solutions and automation roles at AI companies (OpenAI, Anthropic, Databricks, Palantir, Sierra, Decagon, Rogo, n8n, Sarvam and more) and at fintechs. You take an AI product into a customer’s real work, specify what to build, build it with AI tools and ship it, as you did with the Decision Console and Melange. Check the coding bar in each listing: “forward deployed engineer” roles usually expect you to write production code yourself, while deployment strategist, agent development and solutions roles lean on judgement, domain knowledge and specification. Rogo’s “Forward Deployed Banker” roles want finance experience above all. Roles at the AI labs are marked Long shot.'},
+  {p:10, title:'Internships and trainee roles in India', note:'Product, research, markets, finance, data, strategy and AI internships and trainee roles at your target companies in India, for a fast way inside. Engineering, design, sales and support internships are left out, and so are campus, student and graduate programmes. Many internships still ask for current students or recent graduates, so read the eligibility line before you apply, and lead with what you have built and your markets experience. Stipends are usually far below a full-time salary; the value is the door, so ask about conversion to a full-time role. For more, use the internship searches under “Search for more”.'}];
+var REGIONS = ['India', 'Singapore', 'Europe', 'Switzerland', 'Canada', 'US', 'Remote'];
 var ER_JOB_RE = /research analyst|equity research|research associate|investment research|(?:sector|fundamental|equity|buy[- ]side|sell[- ]side|credit|fund|investment|ratings?) analyst|analyst,? (?:equity|equities) research|\bER associate|research (?:intern|trainee)/i;
-function jobGroup(j){ if (j.priority === 9) return 9; if (!(j.priority >= 6 || j.priority === undefined)) return j.priority; if (ER_JOB_RE.test(j.title || '')) return 'er'; return isOptJob(j) ? 9 : j.priority; }
-var KIND_NAMES = {invest:'Broker, trading or investing app', trading:'Trading firm', crypto:'Crypto exchange', infra:'Exchange, market data or trading software', fintech:'Fintech', bank:'Bank or asset manager', amc:'Indian fund house', research:'Research, ratings or index firm', ai:'AI company'};
+function jobGroup(j){ if (j.priority === 10) return 10; if (j.priority === 9) return 9; if (!(j.priority >= 6 || j.priority === undefined)) return j.priority; if (ER_JOB_RE.test(j.title || '')) return 'er'; return isOptJob(j) ? 9 : j.priority; }
+var KIND_NAMES = {invest:'Broker, trading or investing app', trading:'Trading firm', crypto:'Crypto exchange', infra:'Exchange, market data or trading software', fintech:'Fintech', bank:'Bank or asset manager', amc:'Indian fund house', research:'Research, ratings or index firm', ai:'AI company', board:'Found by job-board search'};
 var TIERS = [
   {t:'A', title:'Strong fit', note:'Brokers, trading and investing apps, and crypto exchanges. Their products are built for people like you, so apply to every relevant opening.'},
   {t:'B', title:'Good fit', note:'Other fintechs, exchanges, market data and trading software, larger brokers, banks’ and fund managers’ markets teams, Indian fund houses and research firms, where your markets knowledge still counts. Also the AI companies whose forward-deployed and deployment roles reward domain knowledge.'},
@@ -7288,6 +7388,12 @@ var JOB_BOARDS = [
   ['India', 'Naukri: options trader roles, Ahmedabad', 'https://www.naukri.com/options-trader-jobs-in-ahmedabad'],
   ['India', 'Naukri: options trader roles, Surat', 'https://www.naukri.com/options-trader-jobs-in-surat'],
   ['India', 'Naukri: proprietary trader roles, India', 'https://www.naukri.com/proprietary-trader-jobs'],
+  ['India', 'LinkedIn: product management internships, India', 'https://www.linkedin.com/jobs/search/?keywords=product%20management&location=India&f_E=1'],
+  ['India', 'LinkedIn: equity research and finance internships, India', 'https://www.linkedin.com/jobs/search/?keywords=%22equity%20research%22%20OR%20%22investment%20research%22%20OR%20finance&location=India&f_E=1'],
+  ['India', 'LinkedIn: trading, markets and fintech internships, India', 'https://www.linkedin.com/jobs/search/?keywords=trading%20OR%20markets%20OR%20fintech&location=India&f_E=1'],
+  ['India', 'Internshala: product management internships', 'https://internshala.com/internships/product-management-internship/'],
+  ['India', 'Internshala: stock market and trading internships', 'https://internshala.com/internships/stock-market-trading-internship/'],
+  ['India', 'Internshala: finance internships', 'https://internshala.com/internships/finance-internship/'],
   ['India', 'Instahyre', 'https://www.instahyre.com/'],
   ['India', 'Wellfound (startups)', 'https://wellfound.com/jobs'],
   ['India', 'Naukri', 'https://www.naukri.com/'],
@@ -7332,7 +7438,7 @@ function tickPage(c, on){ var y = window.scrollY; if (on) S.pages[c.name] = toda
 function inRegion(c, region){ return region === 'All' || String(c.regions || '').split(', ').indexOf(region) >= 0; }
 function regionsOf(j){ return Array.isArray(j.regions) ? j.regions : (j.regions ? [j.regions] : []); }
 function trackJob(j){
-  S.apps.push({id: Date.now().toString(36), company:j.company, role:j.title, location:j.location, applied:'', referral:'No', stage:'To apply', next:'Tailor your CV and apply', link:j.url, jobId:j.id, path:(function(){ var ty = jobType(j); return ty === 'open' || ty === 'build' ? 'other' : ty; })()});
+  S.apps.push({id: Date.now().toString(36), company:j.company, role:j.title, location:j.location, applied:'', referral:'No', stage:'To apply', next:'Tailor your CV and apply', link:j.url, jobId:j.id, path:(function(){ var ty = jobType(j); return ty === 'open' || ty === 'build' || ty === 'intern' ? 'other' : ty; })()});
   save(); badges(); renderJobs();
 }
 /* ---------- job filters ---------- */
@@ -7346,7 +7452,8 @@ function isOptJob(j){
 }
 var JOB_TYPES = [['opt', 'Options trading', function(g){ return g === 9; }], ['pm', 'Product', function(g){ return typeof g === 'number' && g >= 1 && g <= 5; }],
   ['er', 'Equity research', function(g){ return g === 'er'; }], ['mk', 'Trading and markets', function(g){ return g === 6; }],
-  ['open', 'Open-door', function(g){ return g === 7; }], ['build', 'AI builder', function(g){ return g === 8; }]];
+  ['open', 'Open-door', function(g){ return g === 7; }], ['build', 'AI builder', function(g){ return g === 8; }],
+  ['intern', 'Internships', function(g){ return g === 10; }]];
 var JOB_LEVELS = [['junior', 'Junior'], ['mid', 'Mid-level'], ['senior', 'Senior']];
 var JOB_EXP = [['any', 'Any experience'], ['2', 'Asks up to 2 years'], ['5', 'Asks up to 5 years'], ['8', 'Asks up to 8 years']];
 var JOB_POSTED = [['any', 'Any time'], ['7', 'Past week'], ['30', 'Past month']];
@@ -7375,7 +7482,7 @@ function jfActive(f){ return (f.fit && f.fit !== 'any' ? 1 : 0) + f.types.length
 function jobLevel(j){
   var t = j.title || '';
   if (/\b(senior|sr\.?|lead|principal|staff|head|director|vp|avp|vice president|experienced|expert)\b/i.test(t) || j.exp >= 7) return 'senior';
-  if (/\b(junior|jr\.?|trainee|entry[- ]level|graduate|grad|assistant|apprentice|associate)\b/i.test(t) || (typeof j.exp === 'number' && j.exp <= 2)) return 'junior';
+  if (/\b(junior|jr\.?|trainee|intern|internship|entry[- ]level|graduate|grad|assistant|apprentice|associate)\b/i.test(t) || (typeof j.exp === 'number' && j.exp <= 2)) return 'junior';
   return 'mid';
 }
 function jobAge(j){ var d = /^\d{4}-\d{2}-\d{2}/.test(j.posted || '') ? j.posted.slice(0, 10) : j.firstSeen; return d ? daysBetween(d, today()) : 999; }
@@ -7438,7 +7545,7 @@ function renderJobs(){
       jfSelect('Posted', 'posted', JOB_POSTED, 'jf-posted'),
       el('label', {class:'jf-field'}, [el('span', {text:'City'}), el('select', {id:'jf-city', 'data-fid':'jf-city', onchange:function(e){ f.city = e.target.value; jfSave(); }})]),
       jfSelect('Company type', 'kind', [['', 'Any company']].concat(Object.keys(KIND_NAMES).filter(function(k){ return kinds[k]; }).map(function(k){ return [k, KIND_NAMES[k]]; })), 'jf-kind'),
-      jfSelect('Match with your profile', 'fit', [['any', 'Any match'], ['good', 'Good match or better'], ['strong', 'Strong match only']], 'jf-fit'),
+      jfSelect('Your chance', 'fit', [['any', 'Any chance'], ['good', 'Fair chance or better'], ['strong', 'Strong chance only']], 'jf-fit'),
       jfSelect('Order', 'sort', [['fit', 'Grouped, best match first'], ['match', 'Best match first'], ['new', 'Newest first']], 'jf-sort')]),
     el('div', {class:'jf-row'}, [el('span', {class:'jf-lab', text:'Level'}), el('div', {class:'chips', id:'jf-lv', role:'group', 'aria-label':'Level'})]),
     el('div', {class:'jf-checks'}, [
@@ -7486,7 +7593,7 @@ function jobsRefresh(){
   var row = function(j, typeTag){
     var tracked = trackedJob(j), tags = [];
     var fl = fitLevel(j);
-    if (fl) tags.push(el('span', {class:'tag tag-fit fit-' + fl, title:'How well this role matches your profile and skills', text: fl === 'strong' ? 'Strong match' : fl === 'good' ? 'Good match' : 'Stretch'}));
+    if (fl) tags.push(el('span', {class:'tag tag-fit fit-' + fl, title:'Your realistic chance of an interview: experience asked, seniority, work permit and skills', text: fl === 'strong' ? 'Strong chance' : fl === 'good' ? 'Fair chance' : 'Long shot'}));
     if (isNewJob(j)) tags.push(el('span', {class:'tag', text:'New'}));
     if (typeTag) tags.push(el('span', {class:'tag is-plain', text:typeTag}));
     if (j.tier === 'C') tags.push(el('span', {class:'tag is-plain', text:'Long shot'}));
@@ -7500,7 +7607,8 @@ function jobsRefresh(){
         el('span', {class:'jc', text: j.company + ' · ' + (j.location || regionsOf(j).join(', ')) + (j.posted ? ' · posted ' + shortDate(j.posted) : '')}),
         fitWhy(j) ? el('span', {class:'jfit', text: fitWhy(j)}) : null])),
       el('div', {class:'job-acts'}, [
-        el('button', {type:'button', class:'btn btn-small btn-quiet', 'data-fid':'job-ref', title:'Find someone at ' + j.company + ' who could refer you', onclick:function(){ var ty = jobType(j); PEOPLE_PREFILL = {company:j.company, path: ty === 'open' || ty === 'build' ? 'other' : ty}; location.hash = '#/people'; }}, ['Find a referrer']),
+        el('button', {type:'button', class:'btn btn-small btn-quiet', 'data-fid':'job-ref', title:'Find someone at ' + j.company + ' who could refer you', onclick:function(){ var ty = jobType(j); PEOPLE_PREFILL = {company:j.company, path: ty === 'open' || ty === 'build' || ty === 'intern' ? 'other' : ty}; location.hash = '#/people'; }}, ['Find a referrer']),
+        cvBank() ? el('button', {type:'button', class:'btn btn-small btn-quiet', 'data-fid':'job-cv', title:'Build a CV for this job from your own bullet bank, in your master layout', onclick:function(){ cvTailorStart(j); }}, ['Tailor CV']) : null,
         tracked ? el('a', {class:'btn btn-small btn-quiet', href:'#/apps', text:'Tracking'})
                 : el('button', {type:'button', class:'btn btn-small', onclick:function(){ trackJob(j); }}, ['Track'])])]);
   };
@@ -7897,7 +8005,7 @@ function tickClock(){
 }
 setInterval(tickClock, 60000);
 document.addEventListener('visibilitychange', function(){ if (!document.hidden) tickClock(); });
-function rerender(){ if (ER_ROUTES.indexOf(currentRoute) >= 0) erRoute(currentRoute, CUR_PARTS, true); else if (currentRoute === 'today') renderToday(false); else if (currentRoute === 'progress') renderProgress(); else if (currentRoute === 'log') renderLog(); else if (currentRoute === 'scorecard') renderScore(); else if (currentRoute === 'apps') renderApps(); else if (currentRoute === 'jobs') renderJobs(); else if (currentRoute === 'backup') renderBackup(); syncDocs(); badges(); savedAt(); }
+function rerender(){ applySchedule(); if (ER_ROUTES.indexOf(currentRoute) >= 0) erRoute(currentRoute, CUR_PARTS, true); else if (currentRoute === 'today') renderToday(false); else if (currentRoute === 'progress') renderProgress(); else if (currentRoute === 'log') renderLog(); else if (currentRoute === 'scorecard') renderScore(); else if (currentRoute === 'apps') renderApps(); else if (currentRoute === 'jobs') renderJobs(); else if (currentRoute === 'backup') renderBackup(); syncDocs(); badges(); savedAt(); }
 window.addEventListener('storage', function(e){ if (e.key === KEY) { var a = document.activeElement; if (a && a.matches && a.matches('input, select, textarea')) return; try { S = merge(JSON.parse(e.newValue)); } catch(err){} rerender(); } });
 
 var ER_OK = false;
@@ -7955,6 +8063,7 @@ function erS(){
   if (!Array.isArray(e.mocks)) e.mocks = [];
   return e;
 }
+function erPlanStart(){ var s = S.start; return (s && /^\d{4}-\d{2}-\d{2}$/.test(s) && s > ER.exam.start && daysBetween(s, erExam()) >= 8) ? s : ER.exam.start; }
 function erExam(){ var d = S.er && S.er.exam; return (d && /^\d{4}-\d{2}-\d{2}$/.test(d)) ? d : ER.exam.date; }
 function erDaysLeft(){ return daysBetween(today(), erExam()); }
 function erAct(n){ var e = erS(), t = today(); e.act[t] = (e.act[t] || 0) + (n || 1); }
@@ -8006,7 +8115,7 @@ function partSections(c, k, of){
   return out;
 }
 function erPlan(){
-  var exam = erExam(), start = ER.exam.start, key = start + '|' + exam;
+  var exam = erExam(), start = erPlanStart(), key = start + '|' + exam;
   if (PLAN_MEMO.key === key) return PLAN_MEMO.days;
   var days = [], finalN = Math.max(1, Math.min(7, daysBetween(start, exam)));
   var finalStart = addDays(exam, -finalN), study = [];
@@ -8104,7 +8213,7 @@ function erNextUp(){
 /* today block, shared by Today and the ER home */
 function erTodayBlock(iso, opts){
   opts = opts || {};
-  var d = erPlanDay(iso), t = today(), start = ER.exam.start;
+  var d = erPlanDay(iso), t = today(), start = erPlanStart();
   if (!d) {
     if (iso < start && daysBetween(iso, start) <= 3) {
       var c1 = ERCH[1];
@@ -8162,9 +8271,9 @@ var CUR_PARTS = [];
 
 function erExamInput(){
   var msg = el('span', {class:'er-msg', role:'status'});
-  var inp = el('input', {type:'date', value: erExam(), min: addDays(ER.exam.start, 8), 'data-fid':'er-exam', 'aria-label':'Exam date', onchange:function(e){
+  var inp = el('input', {type:'date', value: erExam(), min: addDays(erPlanStart(), 8), 'data-fid':'er-exam', 'aria-label':'Exam date', onchange:function(e){
     var v = e.target.value;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || v < addDays(ER.exam.start, 8)) { msg.textContent = 'Pick a date on or after ' + shortDate(addDays(ER.exam.start, 8)) + '.'; return; }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || v < addDays(erPlanStart(), 8)) { msg.textContent = 'Pick a date on or after ' + shortDate(addDays(erPlanStart(), 8)) + '.'; return; }
     erS().exam = v; save(); badges(); erRerender(); }});
   return el('label', {class:'er-date'}, ['Exam date ', inp, msg]);
 }
@@ -8272,7 +8381,7 @@ function fmtScore(x){ return (Math.round(x * 100) / 100).toString(); }
 
 function renderErPlan(){
   var b = erBody('erplan'), t = today(), days = erPlan(), done = days.filter(erDone).length, bh = erBehind().length;
-  b.appendChild(erHead('erplan', 'NISM study plan', 'One hour a day from ' + shortDate(ER.exam.start) + ', on top of your PM program. Every chapter, then a week of mocks and revision before the exam.'));
+  b.appendChild(erHead('erplan', 'NISM study plan', 'One hour a day from ' + shortDate(erPlanStart()) + ', on top of your PM program. Every chapter, then a week of mocks and revision before the exam.'));
   var set = el('div', {class:'session-set er-set'}, [erExamInput(),
     el('label', {}, ['NISM hour starts at ', el('input', {type:'time', 'data-fid':'er-start', value: S.settings.erStart || '07:30', onchange:function(e){ S.settings.erStart = e.target.value || '07:30'; save(); erRerender(); }})])]);
   b.appendChild(set);
@@ -9076,7 +9185,7 @@ function pmCard(iso){
   });
   else p.segs.slice(0, 3).forEach(function(s){ list.appendChild(el('li', {}, [el('b', {text: s.label || 'Task'}), el('span', {text: trim(s.text, 80)})])); });
   return el('section', {class:'sc sc-pm' + (p.done ? ' is-done' : '')}, [head,
-    el('h3', {class:'sc-title', text: p.w.part === 'setup' ? 'Setup weekend' : weekLabel(p.w) + ': ' + p.w.title}), list,
+    el('h3', {class:'sc-title', text: p.w.part === 'setup' ? setupName() : weekLabel(p.w) + ': ' + p.w.title}), list,
     el('div', {class:'sc-acts'}, [
       el('button', {type:'button', class:'done-toggle sc-done', 'data-fid':'pm-done', 'aria-pressed': p.done ? 'true' : 'false', onclick:function(){ setDone(iso, !isDone(iso)); }}, [el('span', {class:'box', 'aria-hidden':'true'}), p.done ? 'PM done' : 'Mark PM done']),
       el('button', {type:'button', class:'btn btn-small btn-quiet', onclick:goPlan}, ['Session plan'])])]);
@@ -9084,8 +9193,8 @@ function pmCard(iso){
 function sessionRows(iso){
   var t = today(), rows = [], ed = erPlanDay(iso), p = pmSession(iso), F = focusActive();
   var erCard = erTodayBlock(iso, {agenda:true}), pmc = pmCard(iso);
-  if (erCard) rows.push({k:'er', at: erStartMinutes(), card: erCard, name: ed && ed.kind === 'exam' ? 'NISM exam' : 'NISM hour', what: ed ? erDayTitle(ed) : 'Starts ' + shortDate(ER.exam.start), done: ed ? erDone(ed) : false, goal: !!(ed && ed.kind !== 'exam' && ed.kind !== 'light-review')});
-  if (pmc) rows.push({k:'pm', at: p.start, card: pmc, name: p.routine ? 'PM session' : p.rest ? 'PM rest day' : 'PM tasks', what: p.w.part === 'setup' ? 'Setup weekend' : weekLabel(p.w) + ': ' + p.w.title, done: p.done, goal: !p.rest, flex: !p.routine});
+  if (erCard) rows.push({k:'er', at: erStartMinutes(), card: erCard, name: ed && ed.kind === 'exam' ? 'NISM exam' : 'NISM hour', what: ed ? erDayTitle(ed) : 'Starts ' + shortDate(erPlanStart()), done: ed ? erDone(ed) : false, goal: !!(ed && ed.kind !== 'exam' && ed.kind !== 'light-review')});
+  if (pmc) rows.push({k:'pm', at: p.start, card: pmc, name: p.routine ? 'PM session' : p.rest ? 'PM rest day' : 'PM tasks', what: p.w.part === 'setup' ? setupName() : weekLabel(p.w) + ': ' + p.w.title, done: p.done, goal: !p.rest, flex: !p.routine});
   rows.sort(function(a, b){ return a.at - b.at; });
   if (!rows.length) return null;
   var list = el('div', {class:'srows'});
@@ -9322,7 +9431,7 @@ function heardBack(a){ return !!a.replied || !!HEARD[a.stage]; }
 function gotIv(a){ return !!a.iv || !!IV[a.stage]; }
 function firstName(n){ return String(n || '').trim().split(/\s+/)[0] || 'there'; }
 function inferPath(text, jobId){
-  if (jobId && typeof jobList === 'function') { var j = jobList().filter(function(x){ return x.id === jobId; })[0]; if (j) { var ty = jobType(j); return ty === 'open' || ty === 'build' ? 'other' : ty; } }
+  if (jobId && typeof jobList === 'function') { var j = jobList().filter(function(x){ return x.id === jobId; })[0]; if (j) { var ty = jobType(j); return ty === 'open' || ty === 'build' || ty === 'intern' ? 'other' : ty; } }
   var t = String(text || '');
   if (OPT_JOB_RE.test(t) || /\boptions?\b.*\btrader\b|\bF&O\b|derivativ.*(trader|dealer)/i.test(t)) return 'opt';
   if (ER_JOB_RE.test(t)) return 'er';
@@ -10209,32 +10318,43 @@ function renderTmm(){
 /* ---------- CV kit, trading record and research interview prep ---------- */
 var CV_FAMS = ['PRD', 'CALC', 'TPM', 'RES', 'MKT', 'QNT', 'AI'];
 var CV_FAM_PATH = {PRD:'pm', CALC:'pm', TPM:'pm', RES:'er', MKT:'opt', QNT:'mk', AI:'other'};
-var CV_FAM_NAME = {PRD:'Product', CALC:'Fund analytics', TPM:'Technical PM', RES:'Research', MKT:'Markets and trading', QNT:'Quant and risk', AI:'AI building'};
+var CV_FAM_NAME = {PRD:'Product', CALC:'Fund analytics', TPM:'Technical PM', RES:'Research', MKT:'Markets and trading', QNT:'Quant and risk', AI:'AI building', JOB:'This job'};
 var CV_LEAD = {Melange:['experience', 0], Trader:['experience', 1], Tata:['experience', 2, 3], Console:['projects', 0], Indicators:['projects', 1], Projects:['projects', 0, 1, 2, 3]};
 
 function cvInit(){
-  if (window.CV_DATA && window.CV_DATA.v && (!S.cvbank || S.cvbank.v !== window.CV_DATA.v)) { S.cvbank = window.CV_DATA; saveSoon(); }
+  if (window.CV_DATA && window.CV_DATA.v && (!S.cvbank || S.cvbank.v !== window.CV_DATA.v)) { var keepV = S.cvbank && S.cvbank.variants; S.cvbank = window.CV_DATA; if (keepV && !S.cvbank.variants) S.cvbank.variants = keepV; saveSoon(); }
+  if (window.CV_VARIANTS && S.cvbank && S.cvbank.experience && (!S.cvbank.variants || S.cvbank.variants.v !== window.CV_VARIANTS.v)) { S.cvbank.variants = window.CV_VARIANTS; saveSoon(); }
 }
 function cvBank(){ return S.cvbank && S.cvbank.experience ? S.cvbank : null; }
 function cvAllBullets(B){ var out = {}; B.experience.concat(B.projects).forEach(function(e){ e.bullets.forEach(function(b){ out[b.id] = b; }); }); return out; }
 function cvState(f){ var p = ps(); p.cv = p.cv || {}; return p.cv[f] || (p.cv[f] = {ids:{}, skills:{}}); }
-function cvPicked(B, f, id){ var st = cvState(f); return st.ids[id] !== undefined ? st.ids[id] : B.recipes[f].ids.indexOf(id) >= 0; }
-function cvSkillPicked(B, f, id){ var st = cvState(f); return st.skills[id] !== undefined ? st.skills[id] : B.recipes[f].skills.indexOf(id) >= 0; }
+function cvPicked(B, f, id){ var st = cvState(f); if (f === 'JOB') return !!st.ids[id]; return st.ids[id] !== undefined ? st.ids[id] : B.recipes[f].ids.indexOf(id) >= 0; }
+function cvSkillPicked(B, f, id){ var st = cvState(f); if (f === 'JOB') return !!st.skills[id]; return st.skills[id] !== undefined ? st.skills[id] : B.recipes[f].skills.indexOf(id) >= 0; }
 /* the entries a family's CV shows, in the recipe's order, each with its picked bullets */
-function cvCompose(B, f){
-  var R = B.recipes[f], st = cvState(f), seen = {}, exp = [], proj = [];
+function cvCompose(B, f){ return cvComposeState(B, cvState(f), f); }
+function cvComposeState(B, st, f){
+  var job = f === 'JOB', base = job ? (st.fam && B.recipes[st.fam] ? st.fam : 'PRD') : f, R = B.recipes[base], seen = {}, exp = [], proj = [];
+  var reg = function(t){ return t; }, RT = R.texts || {}, LANG = B.lang_row || 'K8'; cvtSetLeads(B);   /* your register rule: "proprietary book" for trading roles only */
+  var on = function(id){ return job ? !!st.ids[id] : (st.ids[id] !== undefined ? st.ids[id] : R.ids.indexOf(id) >= 0); };
+  var skOn = function(id){ return job ? !!st.skills[id] : (st.skills[id] !== undefined ? st.skills[id] : (R.skills.indexOf(id) >= 0 || id === LANG)); };
+  var rk = function(m, id){ return m && m[id] !== undefined ? m[id] : 999; };
   var order = R.lead.concat(['Melange', 'Trader', 'Tata', 'Console', 'Indicators', 'Projects']);
   order.forEach(function(name){
     var ref = CV_LEAD[name]; if (!ref) return;
     ref.slice(1).forEach(function(i){
       var key = ref[0] + i; if (seen[key]) return; seen[key] = 1;
       var e = B[ref[0]][i]; if (!e) return;
-      var bs = e.bullets.filter(function(b){ return cvPicked(B, f, b.id); });
+      var bs = e.bullets.filter(function(b){ return on(b.id) && !(b.off && st.ids[b.id] !== true); });
+      bs = bs.map(function(b, n){ var t = (job && st.texts && st.texts[b.id]) || RT[b.id] || b.text; return {id:b.id, text:t, sub:b.sub, tags:b.tags, check:b.check, n:n}; });
+      if (job) bs.sort(function(a, b){ return rk(st.rank, a.id) - rk(st.rank, b.id) || a.n - b.n; });
+      else bs.sort(function(a, b){ var x = R.ids.indexOf(a.id), y = R.ids.indexOf(b.id); return (x < 0 ? 999 : x) - (y < 0 ? 999 : y) || a.n - b.n; });
       (ref[0] === 'experience' ? exp : proj).push({e:e, bullets:bs});
     });
   });
-  return {headline: st.headline !== undefined ? st.headline : B.bank[f].headline, summary: st.summary !== undefined ? st.summary : B.bank[f].summary,
-    exp:exp, proj:proj, skills:B.skills.filter(function(s){ return cvSkillPicked(B, f, s.id); })};
+  var skills = B.skills.filter(function(s){ return skOn(s.id); });
+  if (job) skills = skills.map(function(s, n){ return {s:s, n:n}; }).sort(function(a, b){ return rk(st.skillRank, a.s.id) - rk(st.skillRank, b.s.id) || a.n - b.n; }).map(function(x){ return x.s; });
+  else skills = skills.map(function(s, n){ return {s:s, n:n}; }).sort(function(a, b){ var x = a.s.id === LANG ? 998 : R.skills.indexOf(a.s.id), y = b.s.id === LANG ? 998 : R.skills.indexOf(b.s.id); return (x < 0 ? 997 : x) - (y < 0 ? 997 : y) || a.n - b.n; }).map(function(x){ return x.s; });
+  return {headline: st.headline !== undefined ? st.headline : B.bank[base].headline, summary: reg(st.summary !== undefined ? st.summary : B.bank[base].summary), exp:exp, proj:proj, skills:skills};
 }
 function cvChecks(B, f, C){
   var out = [], text = [C.headline, C.summary].concat(C.exp.concat(C.proj).reduce(function(a, x){ return a.concat(x.bullets.map(function(b){ return b.text; })); }, [])).concat(C.skills.map(function(s){ return s.text; })).join(' \n ');
@@ -10250,27 +10370,41 @@ function cvChecks(B, f, C){
   if (!out.length) out.push(['ok', 'No issues found against your facts register.']);
   return out;
 }
-function cvLead(text){ var m = text.match(/^([^:]{3,48}):\s(.*)$/); return m ? [el('strong', {text:m[1] + ': '}), m[2]] : [text]; }
+var CV_PLAIN_LEAD = {D3:1, D4:1, R1:1};   /* your master writes these lead-ins in plain text */
+var CV_LINKS = [['TradingView','https://www.tradingview.com/script/04le9Xr3-IV-vs-RV-Volatility-Cones/'],['verified certificate','https://courses.edx.org/certificates/7ae59804217747aea7304d149667769a']];
+/* links as in your master CV: e-mail, LinkedIn, X and site addresses found in the text, plus the two named links above */
+function cvLinked(text){
+  var out = [], rx = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})|((?:linkedin\.com\/in\/|x\.com\/)[A-Za-z0-9_-]+|melangeresearch\.com)|(TradingView|verified certificate)/g, last = 0, m;
+  while ((m = rx.exec(text))) {
+    if (m.index > last) out.push(text.slice(last, m.index));
+    var href = m[1] ? 'mailto:' + m[1] : m[2] ? 'https://' + (m[2].indexOf('linkedin') === 0 ? 'www.' : '') + m[2] + '/' : (CV_LINKS.filter(function(l){ return l[0] === m[3]; })[0] || [])[1];
+    out.push(href ? el('a', {href:href, target:'_blank', rel:'noopener', text:m[0]}) : m[0]);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+function cvLead(text, id){ var sp = cvtSplit(text); return sp[0] ? [el('strong', {text:sp[0] + ': '}), sp[1]] : [text]; }
 function cvSheet(B, C){
   var c = B.contact, sheet = el('article', {class:'cv-sheet', id:'cv-sheet'});
   sheet.appendChild(el('h1', {class:'cv-name', text:c.name}));
   sheet.appendChild(el('p', {class:'cv-head', text:C.headline}));
-  sheet.appendChild(el('p', {class:'cv-contact', text:c.line}));
-  sheet.appendChild(el('p', {class:'cv-contact', text:c.links}));
-  sheet.appendChild(el('h2', {text:'Summary'})); sheet.appendChild(el('p', {class:'cv-sum', text:C.summary}));
+  sheet.appendChild(el('p', {class:'cv-contact'}, cvLinked(c.line)));
+  sheet.appendChild(el('p', {class:'cv-contact'}, cvLinked(c.links)));
+  sheet.appendChild(el('h2', {class:'cv-h-first', text:'Summary'})); sheet.appendChild(el('p', {class:'cv-sum', text:C.summary}));
   var block = function(title, list){
     list = list.filter(function(x){ return x.bullets.length; }); if (!list.length) return;
     sheet.appendChild(el('h2', {text:title}));
     list.forEach(function(x){
       sheet.appendChild(el('div', {class:'cv-role'}, [el('b', {text:x.e.title}), el('span', {text:x.e.dates})]));
-      if (x.e.sub) sheet.appendChild(el('p', {class:'cv-sub', text:x.e.sub}));
-      sheet.appendChild(el('ul', {}, x.bullets.map(function(b){ return el('li', {class: b.sub ? 'is-sub' : ''}, cvLead(b.text)); })));
+      if (x.e.sub) sheet.appendChild(el('p', {class:'cv-sub'}, cvLinked(x.e.sub)));
+      sheet.appendChild(el('ul', {}, x.bullets.map(function(b){ return el('li', {class: b.sub ? 'is-sub' : ''}, cvLead(b.text, b.id)); })));
     });
   };
   block('Experience', C.exp); block('Projects', C.proj);
-  if (C.skills.length) { sheet.appendChild(el('h2', {text:'Skills and knowledge'})); sheet.appendChild(el('dl', {class:'cv-skills'}, [].concat.apply([], C.skills.map(function(s){ return [el('dt', {text:s.label}), el('dd', {text:s.text})]; })))); }
+  if (C.skills.length) { sheet.appendChild(el('h2', {text:'Skills & Knowledge'})); sheet.appendChild(el('dl', {class:'cv-skills'}, [].concat.apply([], C.skills.map(function(s){ return [el('dt', {text:s.label}), el('dd', {text:s.text})]; })))); }
   sheet.appendChild(el('h2', {text:'Education'}));
-  (B.education || []).forEach(function(e){ sheet.appendChild(el('div', {class:'cv-role'}, [el('b', {text:e.title}), el('span', {text:e.dates})])); sheet.appendChild(el('p', {class:'cv-sub', text:e.sub})); });
+  (B.education || []).forEach(function(e){ sheet.appendChild(el('div', {class:'cv-role'}, [el('b', {text:e.title}), el('span', {text:e.dates})])); sheet.appendChild(el('p', {class:'cv-sub'}, cvLinked(e.sub))); });
   return sheet;
 }
 function cvPlain(B, C){
@@ -10280,20 +10414,403 @@ function cvPlain(B, C){
   L.push('EDUCATION'); (B.education || []).forEach(function(e){ L.push(e.title + '    ' + e.dates); L.push(e.sub); });
   return L.join('\n');
 }
+/* ---------- tailor the CV to one job description ----------
+   A small scoring model that runs on this device: no account, no API key, and nothing is invented.
+   It reads the job description, decides which of your job families it belongs to, scores every bullet in your
+   bank against what the job asks for, then picks the bullets, the wording you already used in a past CV where that
+   fits the job better, the skills rows and their order. Every line it can output is one of your own lines. */
+var CVT_FAM = {
+  MKT:'trader|trading|middle office|trade support|derivativ|settlement|execution|confirmations?|clearing|brokerage|market making|surveillance|treasury|liquidity',
+  QNT:'\\bdata\\b|quant|validation|data quality|index|\\bESG\\b|statistic|python|\\bsql\\b|reference data|market data|reconcil|methodolog|corporate actions?',
+  CALC:'fund|performance|attribution|portfolio analytics|calculation|returns?\\b|mutual fund|\\bNAV\\b|valuation|peer|morningstar direct|risk reporting',
+  RES:'research|equity|sector|industry|competitive|macro|investment thesis|coverage|earnings|report writing',
+  PRD:'product manager|product owner|roadmap|user stor|requirements|stakeholder|discovery|go-to-market|product analyst|product operations',
+  TPM:'technical product|platform|\\bAPI\\b|data product|integration|engineering teams',
+  AI:'\\bAI\\b|\\bLLM|agent|machine learning|automation|annotation|evaluation|prompt|generative'
+};
+var CVT_STOP = {}; ('about above after again against also among and any are because been before being between both but can could did does doing down during each from further have having here into itself just more most must only other our out over same should some such than that their them then there these they this those through under until very were what when where which while with within would your you will team role work working including across strong ability experience skills years year company client clients business support provide ensure using based related level knowledge understanding required preferred candidate candidates opportunity looking join new environment within global').split(' ').forEach(function(w){ CVT_STOP[w] = 1; });
+/* what jobs ask for, in the words they use: [name shown to you, pattern]. The same pattern is tried on the job and on each CV line. */
+var CVT_CONCEPTS = [
+  ['Python', '\\bpython\\b|pandas|statsmodels|numpy'],
+  ['SQL', '\\bsql\\b|postgres|database quer'],
+  ['Excel', '\\bexcel\\b|pivot tables?|spreadsheet|lookups?\\b'],
+  ['data quality and validation', 'data quality|validat|data integrity|data accuracy|accura(te|cy)|anomal|quality (check|control|assurance)|data cleans|freshness'],
+  ['reconciliation', 'reconcil|cross-check|tie[- ]out|discrepanc|mismatch'],
+  ['data pipelines and automation', 'pipeline|automat|\\bETL\\b|ingest|data feeds?|refresh(ed|es)?\\b|scheduled'],
+  ['market and reference data', 'market data|reference data|bloomberg|refinitiv|reuters|data vendors?|data (sources?|providers?)|official sources|exchange data|pricing data|\\bNSE\\b|\\bFRED\\b'],
+  ['index products', '\\bindex\\b|indices|benchmark|rebalanc|constituent'],
+  ['methodology and documentation', 'methodolog|documentation|document(s|ed|ing)?\\b|rulebook|specification'],
+  ['backtesting', 'back-?test|out-of-sample|in-sample|simulat|replay(ed)?\\b|historical (test|analysis|data)'],
+  ['statistics and quantitative methods', 'statistic|quantitative|\\bquant\\b|regression|time[- ]series|bootstrap|probabilit|econometric|expected[- ]value'],
+  ['risk', '\\brisk\\b|exposure|drawdown|\\bVaR\\b|stress test|position limits?|ruin'],
+  ['derivatives and options', 'derivativ|\\boptions?\\b|futures|greeks|volatilit|black-?scholes|black-76|implied vol'],
+  ['equities', 'equit(y|ies)|\\bstocks?\\b|single-stock|listed compan'],
+  ['fixed income, rates and FX', 'fixed income|\\bbonds?\\b|interest rates?|\\brates\\b|\\bFX\\b|foreign exchange|currenc|credit spreads?'],
+  ['trading and execution', 'trading|trader|execution|order (flow|book|management)|slippage|market making|\\bP&L\\b|\\bpnl\\b'],
+  ['portfolio and asset allocation', 'portfolio|asset allocation|allocation model|diversif|multi-asset'],
+  ['funds and performance', 'mutual funds?|\\bfunds?\\b|performance|attribution|\\breturns?\\b|\\bXIRR\\b|\\bNAV\\b|expense ratio'],
+  ['valuation and fundamentals', 'valuation|fundamental|P/E\\b|earnings|financial statements?|\\bDCF\\b|cash[- ]flows?|balance sheet|multiples'],
+  ['equity research and sector analysis', 'equity research|sector|industry (analysis|structure|trends)|coverage|investment thesis|competitive|stock selection|company analysis'],
+  ['macro and economics', '\\bmacro|econom|inflation|\\bGDP\\b|central bank|\\bRBI\\b|regime|geopolit'],
+  ['ESG and sustainability', '\\bESG\\b|sustainab|climate|carbon|environmental'],
+  ['written reports and presenting', 'reports?\\b|report writing|written|publish|commentary|presentations?|present(ed|ing)\\b'],
+  ['senior stakeholders', 'stakeholder|senior management|leadership|managing director|cross-functional|executive'],
+  ['clients, users and investors', 'client|customer|\\busers?\\b|investors?\\b|retail'],
+  ['product management', 'product manage|product owner|roadmap|backlog|prioriti|user stor|requirements|acceptance criteria|product discovery|product strategy'],
+  ['UX and design', '\\bUX\\b|user experience|design (trade|decision|rul)|onboarding|prototyp|wirefram|usabilit'],
+  ['agile delivery and releases', 'agile|scrum|sprints?\\b|release|ship(ped|ping)?\\b|deliver(y|ed)\\b|go-live|launch'],
+  ['testing and audit', 'test(s|ed|ing)?\\b|\\bQA\\b|audit|acceptance|regression'],
+  ['AI and LLM tools', '\\bAI\\b|\\bLLMs?\\b|agents?\\b|machine learning|\\bML\\b|generative|prompt|model evaluation'],
+  ['platforms, APIs and web apps', '\\bAPIs?\\b|platform|integration|cloud|web app|react\\b|supabase|github'],
+  ['compliance and regulation', 'complian|regulat|\\bSEBI\\b|\\bKYC\\b|\\bAML\\b|governance|controls?\\b|privacy|\\bDPDP\\b'],
+  ['operations and process', 'operations|operational|process (improvement|mapping|design)|workflow|\\bSOPs?\\b|settlement|middle office|trade support|corporate actions?'],
+  ['projects, vendors and budgets', 'project manage|vendors?\\b|contractors?\\b|budget|timeline|procurement|negotiat|cost control'],
+  ['dashboards and reporting', 'dashboard|visuali[sz]|charts?\\b|tableau|power ?bi|\\bMIS\\b|reporting'],
+  ['lending and credit', 'lending|\\bloans?\\b|credit risk|underwrit|collections|\\bNBFC\\b|delinquen'],
+  ['payments and fintech', 'payments?\\b|fintech|\\bUPI\\b|wallet|merchant'],
+  ['monitoring and alerts', 'monitor|alerts?\\b|surveillance|exception'],
+  ['forecasting and financial modelling', 'forecast|financial model|model(l)?ing|scenario'],
+  ['wealth and retail investing', 'wealth|retail invest|\\bSIPs?\\b|advis|robo'],
+  ['pricing', '\\bpricing\\b|\\bprices?\\b|fair value|mark-to-market'],
+  ['signals and strategy research', 'signals?\\b|strateg(y|ies)|alpha|systematic|rules-based']
+];
+var CVT_RX = {};
+function cvtRx(src){ return CVT_RX[src] || (CVT_RX[src] = new RegExp(src, 'gi')); }
+function cvtCount(src, text){ var m = String(text || '').match(cvtRx(src)); return m ? m.length : 0; }
+function cvtFamily(title, jd){
+  var scores = {}, best = null;
+  Object.keys(CVT_FAM).forEach(function(f){ scores[f] = 3 * cvtCount(CVT_FAM[f], title) + Math.min(12, cvtCount(CVT_FAM[f], jd)); if (best === null || scores[f] > scores[best]) best = f; });
+  return {fam:best, scores:scores};
+}
+function cvtKeywords(jd, k){
+  var words = String(jd || '').toLowerCase().match(/[a-z][a-z\-&\/]{3,}/g) || [], freq = {}, order = [];
+  words.forEach(function(w){ if (CVT_STOP[w]) return; if (!freq[w]) { freq[w] = 0; order.push(w); } freq[w]++; });
+  return order.map(function(w, i){ return [w, freq[w], i]; }).sort(function(a, b){ return b[1] - a[1] || a[2] - b[2]; }).slice(0, k || 40).map(function(x){ return x[0]; });
+}
+/* smallest "N years of experience" the job states as a requirement (ignores "preferred" sentences) */
+function cvtYears(jd){
+  var best = null, soft = /\b(preferred|preferable|preferably|a plus|advantage|nice to have|desirable|ideally|bonus|good to have)\b/i;
+  String(jd || '').replace(/\s+/g, ' ').split(/[.;!?]\s+/).forEach(function(x){
+    if (soft.test(x)) return;
+    var rx = /(^|[^\d.])(\d{1,2})\s*(?:\+|plus)?\s*(?:(?:-|–|to|or)\s*\d{1,2}\s*\+?\s*)?(?:years?|yrs?)\b[^.;]{0,60}?\b(experience|exp\b|track record|working)/gi, m;
+    while ((m = rx.exec(x))) { var n = +m[2]; if (n >= 1 && n <= 15) best = best === null ? n : Math.max(best, n); }
+  });
+  return best;
+}
+/* what this job asks for: family, its most used words, and the concepts it names with a weight each */
+function cvtProfile(title, jd){
+  var fm = cvtFamily(title || '', jd || ''), concepts = [];
+  CVT_CONCEPTS.forEach(function(c){
+    var w = Math.min(4, cvtCount(c[1], jd)) + (cvtCount(c[1], title) ? 3 : 0);
+    if (w > 0) concepts.push({k:c[0], rx:c[1], w:w});
+  });
+  concepts.sort(function(a, b){ return b.w - a.w; });
+  return {fam:fm.fam, scores:fm.scores, kws:cvtKeywords(jd, 40), concepts:concepts, years:cvtYears(jd)};
+}
+function cvtRel(P, text){
+  var t = String(text || ''), tl = t.toLowerCase(), s = 0;
+  P.concepts.forEach(function(c){ if (cvtCount(c.rx, t)) s += c.w; });
+  P.kws.forEach(function(w){ if (tl.indexOf(w) >= 0) s += 0.5; });
+  return s;
+}
+function cvtRelC(P, text){ var t = String(text || ''), s = 0; P.concepts.forEach(function(c){ if (cvtCount(c.rx, t)) s += c.w; }); return s; }
+/* a bullet's bold opening: only phrases you have used as a bold opening on a sent CV count (B.leads) */
+var CVT_LEADS = null;
+function cvtSetLeads(B){ CVT_LEADS = null; if (B && B.leads) { CVT_LEADS = {}; B.leads.forEach(function(l){ CVT_LEADS[l] = 1; }); } }
+function cvtSplit(text){ var m = /^([^:]{3,90}): ([\s\S]*)$/.exec(text); if (!m) return ['', text]; return (CVT_LEADS ? CVT_LEADS[m[1]] : /^[A-Z][^:]{2,40}$/.test(m[1])) ? [m[1], m[2]] : ['', text]; }
+function cvtRetired(B, text){ return (B.retired || []).some(function(r){ return text.indexOf(r) >= 0; }); }
+function cvtEntries(B){ var out = []; ['experience', 'projects'].forEach(function(sec){ (B[sec] || []).forEach(function(e, i){ out.push({sec:sec, i:i, e:e}); }); }); return out; }
+/* The plan for one job. fits(state) says whether the CV built from a state still fits two pages. */
+function cvtPlan(B, V, job, jd, fits){
+  var title = (job && job.title) || '', P = cvtProfile(title, jd), fam = P.fam, R = B.recipes[fam];
+  V = V || {}; var VB = V.bullets || {}; cvtSetLeads(B);
+  var RT = R.texts || {}, LANG = B.lang_row || 'K8';
+  var LAST = {T6:1}, ents = cvtEntries(B), all = {}, rel = {}, lead = {}, parent = {};
+  var btxt = function(id){ return RT[id] || all[id].text; };       /* the wording your newest CV of this family used, else the newest wording overall */
+  ents.forEach(function(x){
+    var bs = x.e.bullets.filter(function(b){ return !b.off; }), first = null;
+    bs.forEach(function(b, n){ all[b.id] = b; if (!b.sub && (first === null || (R.ids.indexOf(first) < 0 && R.ids.indexOf(b.id) >= 0))) first = b.id;
+      if (b.sub) { for (var k = n - 1; k >= 0; k--) if (!bs[k].sub) { parent[b.id] = bs[k].id; break; } } });
+    if (first !== null) lead[first] = 1; });
+  Object.keys(all).forEach(function(id){ rel[id] = cvtRel(P, btxt(id)); });
+  var picked = {}, base = {}, added = [], dropped = [], keep = {};
+  Object.keys(all).forEach(function(id){ if (R.ids.indexOf(id) >= 0 || all[id].tags.indexOf('ALL') >= 0) base[id] = 1; });
+  /* always on the page: each role's opening bullet and your "ALL" bullets (the ones every version of your CV carries) */
+  Object.keys(base).forEach(function(id){ if (!all[id].sub && (lead[id] || (all[id].tags.indexOf('ALL') >= 0 && R.ids.indexOf(id) >= 0))) { keep[id] = 1; picked[id] = true; } });
+  /* everything else competes for the space: relevance to this job, plus a head start for the family's own recipe */
+  var score = function(id){ return rel[id] + (base[id] ? 4 : 0) + (/\d/.test(btxt(id)) ? 1 : 0); };   /* a line with a number or result gets a small edge */
+  /* a bullet from outside the recipe may join only when the job also leans towards that bullet's own family */
+  var near = function(tags){ return (tags || []).some(function(t){ return t === 'ALL' || (P.scores[t] > 0 && P.scores[t] >= 0.5 * P.scores[fam]); }); };
+  var pool0 = Object.keys(all).filter(function(id){ return !keep[id] && (base[id] || (!all[id].check && rel[id] >= 5 && near(all[id].tags))); }).sort(function(a, b){ return score(b) - score(a) || R.ids.indexOf(a) - R.ids.indexOf(b); });
+  /* wording: the master line, or a line from one of your past CVs when it speaks to this job clearly better */
+  var texts = {}, reworded = [];
+  /* a past-CV line must not repeat what another bullet on the page already says: no number another bullet carries, and not mostly another bullet's words */
+  var nums = function(t){ var o = {}; (String(t).match(/\d[\d,.]*\d|\d/g) || []).forEach(function(n){ o[n] = 1; }); return o; };
+  var wset = function(t){ var o = {}; (String(t).toLowerCase().match(/[a-z0-9]{4,}/g) || []).forEach(function(w){ o[w] = 1; }); return o; };
+  var mNum = {}, mWord = {}; Object.keys(all).forEach(function(id){ mNum[id] = nums(btxt(id)); mWord[id] = wset(btxt(id)); });
+  var repeats = function(id, v){
+    var vn = nums(v), vw = wset(v), newN = Object.keys(vn).filter(function(n){ return !mNum[id][n]; }), newW = Object.keys(vw).filter(function(w){ return !mWord[id][w]; });
+    return Object.keys(all).some(function(o){
+      if (o === id || !picked[o]) return false;
+      if (newN.some(function(n){ return mNum[o][n]; })) return true;
+      return newW.length >= 3 && newW.filter(function(w){ return mWord[o][w]; }).length >= 0.5 * newW.length;
+    });
+  };
+  var wording = function(){
+    texts = {}; reworded = [];
+    Object.keys(picked).forEach(function(id){ if (!picked[id]) return;
+      var cur = btxt(id), bestT = null, bestS = cvtRelC(P, cur) + 2.5;
+      (VB[id] || []).forEach(function(v){ if (v === cur || cvtRetired(B, v) || v.length > 1.3 * cur.length + 30) return;
+        var s = cvtRelC(P, v); if (s > bestS && !repeats(id, v)) { bestS = s; bestT = v; } });
+      if (bestT) { texts[id] = bestT; reworded.push(id); }
+    });
+  };
+  var order = function(){
+    var rank = {}, n = 0;
+    ents.forEach(function(x){
+      var ids = x.e.bullets.filter(function(b){ return picked[b.id]; }), mains = ids.filter(function(b){ return !b.sub; });
+      var cls = function(b){ return lead[b.id] ? 0 : LAST[b.id] ? 2 : 1; }, ri = function(b){ var k = R.ids.indexOf(b.id); return k < 0 ? 99 : k; };
+      mains.sort(function(a, b){ return cls(a) - cls(b) || rel[b.id] - rel[a.id] || ri(a) - ri(b); });
+      mains.forEach(function(b){ rank[b.id] = n++; ids.forEach(function(s){ if (s.sub && parent[s.id] === b.id) rank[s.id] = n++; }); });
+      ids.forEach(function(s){ if (rank[s.id] === undefined) rank[s.id] = n++; });
+    });
+    return rank;
+  };
+  /* skills rows: the family's rows, most relevant first; one extra row if the job clearly asks for it; Languages last */
+  var srel = {}; (B.skills || []).forEach(function(s){ srel[s.id] = cvtRelC(P, s.label + ' ' + s.text); });
+  var srows = R.skills.slice().sort(function(a, b){ return (srel[b] || 0) - (srel[a] || 0); });
+  var extra = (B.skills || []).filter(function(s){ return R.skills.indexOf(s.id) < 0 && s.id !== LANG && !s.check && near(s.tags); }).sort(function(a, b){ return srel[b.id] - srel[a.id]; })[0];
+  if (extra && srows.length && srel[extra.id] >= Math.max(6, (srel[srows[srows.length - 1]] || 0) + 3)) { srows.push(extra.id); srows.sort(function(a, b){ return (srel[b] || 0) - (srel[a] || 0); }); }
+  srows = srows.slice(0, Math.max(4, R.skills.length));
+  if ((B.skills || []).some(function(s){ return s.id === LANG; })) srows.push(LANG);
+  var state = function(){
+    var ids = {}; Object.keys(all).forEach(function(id){ ids[id] = !!picked[id]; });
+    var sk = {}, skr = {}; (B.skills || []).forEach(function(s){ sk[s.id] = srows.indexOf(s.id) >= 0; }); srows.forEach(function(id, i){ skr[id] = i; });
+    var tx = {}; Object.keys(all).forEach(function(id){ if (picked[id]) { var t = texts[id] || btxt(id); if (t !== all[id].text) tx[id] = t; } });   /* every wording that differs from the newest one */
+    return {fam:fam, ids:ids, skills:sk, rank:order(), skillRank:skr, texts:tx};
+  };
+  /* fill two pages from the top of that list; a role's first experience entry holds at most eight bullets, the others five */
+  var entOf = {}, count = {}; ents.forEach(function(x, n){ x.e.bullets.forEach(function(b){ entOf[b.id] = n; }); count[n] = 0; });
+  Object.keys(picked).forEach(function(id){ count[entOf[id]]++; });
+  var firstExp = 0, st, misses = 0;
+  pool0.forEach(function(id){
+    if (misses >= 4) return;
+    if (all[id].sub && !picked[parent[id]]) return;
+    if (count[entOf[id]] >= (entOf[id] <= 1 ? 8 : 5)) return;   /* Melange and trading roles hold up to eight bullets, the rest five */
+    picked[id] = true; wording();
+    if (fits && !fits(state())) { picked[id] = false; misses++; return; }
+    count[entOf[id]]++;
+  });
+  wording(); st = state();
+  Object.keys(all).forEach(function(id){ if (picked[id] && !base[id]) added.push(id); if (!picked[id] && base[id]) dropped.push(id); });
+  reworded = Object.keys(texts);
+  dropped = dropped.filter(function(id){ return all[id]; });
+  /* what the job asks for and where your CV answers it */
+  var line = function(id){ return texts[id] || btxt(id); };
+  var onCv = Object.keys(picked).filter(function(id){ return picked[id]; }).map(line).concat(srows.map(function(id){ var s = B.skills.filter(function(x){ return x.id === id; })[0]; return s ? s.label + ' ' + s.text : ''; })).concat([B.bank[fam].headline, B.bank[fam].summary]).join(' \n ');
+  var covered = [], missing = [], total = 0, got = 0, pickedIds = Object.keys(picked).filter(function(id){ return picked[id]; });
+  /* the three to five things this job wants most, each with the line on your CV that proves it */
+  var top = P.concepts.slice(0, 5).map(function(c){
+    var ev = pickedIds.filter(function(id){ return cvtCount(c.rx, line(id)); }).sort(function(a, b){ return (/\d/.test(all[b].text) ? 1 : 0) - (/\d/.test(all[a].text) ? 1 : 0) || rel[b] - rel[a]; }).slice(0, 2);
+    return {k:c.k, w:c.w, ids:ev};
+  });
+  var noNum = pickedIds.filter(function(id){ return !/\d/.test(line(id)); }), longOnes = pickedIds.filter(function(id){ return line(id).length > 360; });
+  P.concepts.forEach(function(c){
+    total += c.w;
+    if (cvtCount(c.rx, onCv)) { got += c.w; covered.push(c.k); return; }
+    var where = Object.keys(all).filter(function(id){ return !picked[id] && cvtCount(c.rx, all[id].text); }).slice(0, 3);
+    var sk = (B.skills || []).filter(function(s){ return srows.indexOf(s.id) < 0 && cvtCount(c.rx, s.label + ' ' + s.text); }).map(function(s){ return s.id; }).slice(0, 1);
+    missing.push({k:c.k, w:c.w, bank:where.concat(sk)});
+  });
+  /* other headlines and summaries from your past CVs, best match first: offered, never chosen for you */
+  var pool = function(key, cur){
+    var p = (V[key] || {}), list = (p.ANY || []).concat(fam === 'MKT' ? (p.MKT || []) : []);
+    var curS = cvtRel(P, cur);
+    return list.filter(function(t){ return t !== cur && !cvtRetired(B, t) && (fam === 'MKT' || !/proprietary book/i.test(t)); })
+      .map(function(t){ return [t, cvtRel(P, t)]; }).filter(function(x){ return x[1] > curS; }).sort(function(a, b){ return b[1] - a[1]; }).slice(0, 2).map(function(x){ return x[0]; });
+  };
+  st.rep = {top:top, noNum:noNum, longOnes:longOnes, fam:fam, scores:P.scores, score: total ? Math.round(100 * got / total) : 0, covered:covered, missing:missing, added:added, dropped:dropped, reworded:reworded,
+    years:P.years, kws:P.kws.slice(0, 15), altHead:pool('headlines', B.bank[fam].headline), altSum:pool('summaries', B.bank[fam].summary)};
+  return st;
+}
+
+/* ---------- tailoring: screen and desktop build ---------- */
+var CVT = {pending:null, fetching:false, note:'', build:null, timer:null};
+function cvVariants(B){ return (B && B.variants) || window.CV_VARIANTS || {}; }
+function cvtText(h){
+  var d = document.createElement('textarea'); d.innerHTML = h || ''; var s = d.value; d.innerHTML = s; s = d.value;
+  s = s.replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<\s*(li|p|br|div|h\d|tr|ul)\b[^>]*>/gi, '\n').replace(/<[^>]+>/g, ' ').replace(/[ \t\r\f\v]+/g, ' ').replace(/\n\s*\n+/g, '\n');
+  return s.trim();
+}
+/* the job description: through the desktop app when it is there, otherwise straight from the job boards that allow it */
+function cvtFetchJd(job){
+  if (DESK.api && DESK.api.fetch_jd) return DESK.api.fetch_jd(job).then(function(r){ return r && r.ok && r.jd ? r.jd : Promise.reject((r && r.error) || 'unreadable'); });
+  var m = String(job.id || '').split(':'), ats = m[0], token = m[1], jid = m.slice(2).join(':');
+  var get = function(u){ return fetch(u).then(function(r){ return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); }); };
+  if (ats === 'greenhouse') return get('https://boards-api.greenhouse.io/v1/boards/' + token + '/jobs/' + jid).then(function(d){ return cvtText(d.content); });
+  if (ats === 'lever' || ats === 'lever-eu') return get('https://api' + (ats === 'lever-eu' ? '.eu' : '') + '.lever.co/v0/postings/' + token + '/' + jid).then(function(d){
+    return [d.descriptionPlain].concat((d.lists || []).map(function(l){ return l.text + ':\n' + cvtText(l.content); })).concat([d.additionalPlain]).filter(Boolean).join('\n'); });
+  if (ats === 'ashby') return get('https://api.ashbyhq.com/posting-api/job-board/' + token).then(function(d){
+    var x = (d.jobs || []).filter(function(q){ return q.id === jid; })[0]; return x ? (x.descriptionPlain || cvtText(x.descriptionHtml)) : Promise.reject('gone'); });
+  return Promise.reject('paste');
+}
+/* does the CV built from this state fit two A4 pages? Measured on a hidden copy laid out at the printed width. */
+function cvtFitter(B){
+  var host = document.createElement('div'); host.setAttribute('aria-hidden', 'true');
+  host.style.cssText = 'position:absolute;left:-9999px;top:0;width:182mm;visibility:hidden;pointer-events:none';
+  var limit = (2 * 274.2 - 14) * 96 / 25.4;
+  return function(st){
+    if (!host.parentNode) document.body.appendChild(host);
+    var sheet = cvSheet(B, cvComposeState(B, st, 'JOB')); sheet.removeAttribute('id'); sheet.style.padding = '0'; sheet.style.width = '182mm'; sheet.style.minHeight = '0'; sheet.style.zoom = '1';
+    clear(host).appendChild(sheet);
+    var ok = sheet.offsetHeight <= limit;
+    clear(host);
+    return ok;
+  };
+}
+function cvTailorStart(j){
+  CVT.pending = {id:j.id || '', company:j.company || '', title:j.title || '', location:j.location || '', url:j.url || ''}; CVT.note = ''; CVT.fetching = false; CVT.build = null;
+  location.hash = '#/cvkit';
+}
+function cvTailorRun(job, jd){
+  var B = cvBank(); if (!B) return;
+  jd = String(jd || '').trim();
+  if (jd.length < 200) { CVT.note = 'That is too short to be a job description. Paste the full text of the listing.'; renderCvkit(); return; }
+  var fit = cvtFitter(B), st = cvtPlan(B, cvVariants(B), job, jd, fit), p = ps();
+  st.job = {id:job.id || '', company:job.company || '', title:job.title || '', location:job.location || '', url:job.url || ''};
+  st.jd = jd.slice(0, 12000); st.at = new Date().toISOString().slice(0, 10); st.bank = B.v;
+  p.cv = p.cv || {}; p.cv.JOB = st; S.settings.cvFam = 'JOB'; CVT.pending = null; CVT.note = ''; CVT.build = null;
+  save(); renderCvkit();
+}
+/* the box at the top of the CV kit: one job in, one CV out */
+function cvtPanel(B, f){
+  var st = (ps().cv || {}).JOB, cur = CVT.pending || (st && st.job) || {company:'', title:'', location:'', url:'', id:''};
+  var co = el('input', {type:'text', class:'cv-in', value:cur.company || '', placeholder:'Company', 'data-fid':'cvt-company', 'aria-label':'Company'});
+  var ti = el('input', {type:'text', class:'cv-in', value:cur.title || '', placeholder:'Job title', 'data-fid':'cvt-title', 'aria-label':'Job title'});
+  var jd = el('textarea', {class:'cv-in', rows:'6', placeholder:'Paste the full job description here', 'data-fid':'cvt-jd', 'aria-label':'Job description'});
+  jd.value = CVT.pending ? (CVT.pending.jd || '') : ((st && st.jd) || '');
+  var job = function(){ return {id:cur.id || '', company:co.value.trim(), title:ti.value.trim(), location:cur.location || '', url:cur.url || ''}; };
+  var box = el('section', {class:'cvt', 'aria-label':'Build a CV for one job'}, [
+    el('h2', {text:'Build a CV for one job'}),
+    el('p', {class:'tp-note', text:'Paste a job description, or press “Tailor CV” on any job in the Jobs list. The hub reads what the job asks for, then picks your bullets, your own past wording and your skills rows to answer it, in your master layout. Every line is word for word from a CV you sent; nothing is made up.'}),
+    el('div', {class:'cvt-two'}, [co, ti]), jd,
+    el('div', {class:'cv-acts'}, [
+      el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cvt-run', onclick:function(){ if (!co.value.trim() || !ti.value.trim()) { CVT.note = 'Add the company and the job title first: the title decides which of your CV families fits.'; if (CVT.pending) CVT.pending.jd = jd.value; renderCvkit(); return; } cvTailorRun(job(), jd.value); }}, ['Build CV for this job']),
+      cur.url ? el('a', {class:'btn btn-quiet', href:cur.url, target:'_blank', rel:'noopener', text:'Open the listing'}) : null,
+      CVT.fetching ? el('span', {class:'pitch-flag', text:'Reading the job description…'}) : null]),
+    CVT.note ? el('p', {class:'cv-ck is-check', role:'status', text:CVT.note}) : null]);
+  if (CVT.pending && !CVT.pending.tried) {
+    CVT.pending.tried = true; CVT.fetching = true;
+    var pend = CVT.pending;
+    cvtFetchJd(pend).then(function(text){
+      CVT.fetching = false; if (CVT.pending !== pend) return;
+      if (!text || text.length < 300) throw 'short';
+      cvTailorRun(pend, text);
+    }).catch(function(){
+      CVT.fetching = false; if (CVT.pending !== pend) return;
+      CVT.note = 'This listing could not be read automatically. Open it, copy the job description, paste it below and press Build.';
+      if (currentRoute === 'cvkit') renderCvkit();
+    });
+    setTimeout(function(){ if (CVT.fetching && currentRoute === 'cvkit') renderCvkit(); }, 0);
+  }
+  return box;
+}
+/* what the hub did for this job and why, in plain words */
+function cvtReport(B, st){
+  var r = st.rep || {}, all = cvAllBullets(B), L = [], box = el('section', {class:'cvt-rep', 'aria-label':'How this CV answers the job'});
+  var nm = function(ids){ return ids.join(', '); };
+  L.push(['ok', 'Built from your newest ' + (CV_FAM_NAME[st.fam] || st.fam) + ' CV (' + ((B.bank[st.fam] || {}).from || 'sent CVs').replace(/_/g, ' ') + '). It answers about ' + (r.score || 0) + '% of what the description asks for, weighted by how much the job stresses each thing.']);
+  if (r.years) L.push([r.years >= 5 ? 'warn' : 'info', 'The description asks for ' + r.years + '+ years of experience.' + (r.years >= 5 ? ' That is usually a blocker for you.' : '')]);
+  if (r.top && r.top.length) L.push(['info', 'What this job wants most, and the line that proves it: ' + r.top.map(function(t){ return t.k + (t.ids.length ? ' (' + nm(t.ids) + ')' : ' (no line yet)'); }).join(' · ') + '. Bullets that answer these sit first in each role.']);
+  var inBank = (r.missing || []).filter(function(m){ return m.bank.length; }), none = (r.missing || []).filter(function(m){ return !m.bank.length; });
+  if (inBank.length) L.push(['check', 'Asked for, in your bank, but not on this CV: ' + inBank.map(function(m){ return m.k + ' (' + nm(m.bank) + ')'; }).join(' · ') + '. Tick the bullet below if you want it in.']);
+  if (none.length) L.push(['warn', 'Asked for, and nothing in your CV covers it: ' + none.map(function(m){ return m.k; }).join(' · ') + '. Leave these out unless they are true, and prepare an answer for the interview.']);
+  var ch = [];
+  if (r.added && r.added.length) ch.push('added ' + nm(r.added));
+  if (r.dropped && r.dropped.length) ch.push('left out ' + nm(r.dropped) + ' to keep two pages');
+  var rw = (r.reworded || []).filter(function(id){ return st.ids[id] && st.texts && st.texts[id]; });
+  if (rw.length) ch.push('swapped in a different sent-CV wording for ' + nm(rw));
+  if (ch.length) L.push(['info', 'Against your ' + (CV_FAM_NAME[st.fam] || st.fam) + ' recipe: ' + ch.join('; ') + '.']);
+  if (r.noNum && r.noNum.length) L.push(['info', 'No number or result in ' + nm(r.noNum.filter(function(id){ return st.ids[id]; })) + '. A bullet reads strongest as action then result; add the result in your master CV if you have a true one.']);
+  box.appendChild(el('ul', {class:'cvt-lines'}, L.map(function(c){ return el('li', {class:'cv-ck is-' + c[0], text:c[1]}); })));
+  var acts = [];
+  if (rw.length) acts.push(el('button', {type:'button', class:'btn btn-small btn-quiet', 'data-fid':'cvt-master', onclick:function(){ st.texts = {}; if (st.rep) st.rep.reworded = []; save(); renderCvkit(); }}, ['Undo the wording swaps']));
+  (r.altHead || []).forEach(function(h){ if (st.headline === h) return; acts.push(el('button', {type:'button', class:'btn btn-small btn-quiet', title:'A headline from one of your past CVs that matches this job more closely', onclick:function(){ st.headline = h; save(); renderCvkit(); }}, ['Use headline: ' + (h.length > 70 ? h.slice(0, 68) + '…' : h)])); });
+  (r.altSum || []).forEach(function(t){ if (st.summary === t) return; acts.push(el('button', {type:'button', class:'btn btn-small btn-quiet', title:t, onclick:function(){ st.summary = t; save(); renderCvkit(); }}, ['Use past summary: ' + t.slice(0, 60) + '…'])); });
+  if (acts.length) box.appendChild(el('div', {class:'cv-acts'}, acts));
+  return box;
+}
+/* desktop only: the CV on screen as a PDF and a Word file in your master layout, checked line by line against your facts, saved to Downloads */
+function cvtBuild(f, reword){
+  var B = cvBank(), st = cvState(f), C = cvCompose(B, f), job = f === 'JOB', base = job ? st.fam : f, secs = [], edits = {bullets:{}};
+  [['experience', C.exp], ['projects', C.proj]].forEach(function(g){ g[1].forEach(function(x){ if (x.bullets.length) secs.push({section:g[0], title:x.e.title, dates:x.e.dates, sub:x.e.sub, ids:x.bullets.map(function(b){ return b.id; })}); }); });
+  var wording = {}, allB = cvAllBullets(B);
+  C.exp.concat(C.proj).forEach(function(x){ x.bullets.forEach(function(b){ if (allB[b.id] && b.text !== allB[b.id].text) wording[b.id] = b.text; }); });
+  if (st.headline !== undefined && st.headline !== B.bank[base].headline) edits.headline = st.headline;
+  if (st.summary !== undefined && st.summary !== B.bank[base].summary) edits.summary = st.summary;
+  CVT.build = {state:'running', f:f, lines:[['info', reword ? 'Asking Gemini, then building. This takes two to three minutes; you can keep working.' : 'Building the PDF and Word file…']]};
+  renderCvkit();
+  DESK.api.build_cv({job: job ? st.job : {id:'', company:CV_FAM_NAME[f], title:'General CV', location:'', url:''}, jd: job ? st.jd : '', variant:base, sections:secs,
+      skills:C.skills.map(function(s){ return s.id; }), edits:edits, wording:wording, reword:!!(reword && job)}).then(function(){
+    clearInterval(CVT.timer);
+    CVT.timer = setInterval(function(){
+      DESK.api.build_status().then(function(s){
+        if (!s || s.state === 'running') return;
+        clearInterval(CVT.timer);
+        var R = s.result || {}, L = [];
+        if (s.state !== 'done' || !R.ok) L.push(['warn', 'The build did not finish: ' + (R.error || s.error || 'unknown error') + '.']);
+        else {
+          if (R.saved && R.saved.length) L.push(['ok', 'Saved to your Downloads folder: ' + R.saved.join(' and ') + ' (' + (R.pages || '?') + ' pages). Fact check passed: every line is from your master CV, a past CV, or a re-wording that adds nothing.']);
+          else L.push(['warn', 'Not saved to Downloads: ' + (R.pass ? 'the files could not be copied; they are in ' + R.folder : 'the fact check failed: ' + (R.problems || []).join('; ')) + '.']);
+          (R.report || []).forEach(function(x){ if (/^(kept original|dropped to fit|reworded)/.test(x)) L.push(['info', x.charAt(0).toUpperCase() + x.slice(1) + '.']); });
+          if (R.gemini) { var g = R.gemini; if (g.error) L.push(['check', 'Gemini did not answer (' + g.error + '); built with your own wording.']); else { L.push([g.decision === 'skip' ? 'warn' : 'info', 'Gemini’s read: ' + (g.decision === 'skip' ? 'would skip this role. ' + (g.reason || '') : 'fit ' + (g.score || '?') + '/5. ' + (g.fit || '') + ' Main risk: ' + (g.risk || 'none given') + '.')]); (g.dropped || []).forEach(function(x){ L.push(['info', 'Gemini edit thrown away: ' + x + '.']); }); } }
+        }
+        CVT.build = {state:'done', f:f, lines:L, saved:!!(R.saved && R.saved.length) || !!R.folder};
+        if (currentRoute === 'cvkit') renderCvkit();
+      }, function(){});
+    }, 2000);
+  }, function(e){ CVT.build = {state:'done', f:f, lines:[['warn', 'Could not start the build: ' + e]]}; renderCvkit(); });
+}
+/* the buttons above the preview */
+function cvtDownloadActs(f){
+  if (!(DESK.api && DESK.api.build_cv)) return [];
+  var busy = CVT.build && CVT.build.state === 'running';
+  return [
+    el('button', {type:'button', class:'btn btn-solid', disabled:busy, 'data-fid':'cvt-word', title:'Builds this CV as a PDF and a Word file in your master layout and saves both to your Downloads folder', onclick:function(){ cvtBuild(f, false); }}, ['Download PDF and Word']),
+    f === 'JOB' ? el('button', {type:'button', class:'btn', disabled:busy, 'data-fid':'cvt-gemini', title:'Gemini re-words up to three bullets, the headline and the summary in the job’s own words. Every change is checked against your facts; anything that adds a number, a name or a claim is thrown away. Takes two to three minutes.', onclick:function(){ cvtBuild(f, true); }}, ['Re-word with Gemini, then download']) : null,
+    CVT.build && CVT.build.saved && CVT.build.f === f ? el('button', {type:'button', class:'btn btn-quiet', onclick:function(){ DESK.api.open_cv_folder(); }}, ['Show the file']) : null];
+}
+function cvtBuildLines(f){
+  return CVT.build && CVT.build.f === f ? el('ul', {class:'cvt-lines', role:'status'}, (CVT.build.lines || []).map(function(c){ return el('li', {class:'cv-ck is-' + c[0], text:c[1]}); })) : null;
+}
+function cvZoomAll(){
+  var boxes = document.querySelectorAll('.cv-sheet-box');
+  for (var i = 0; i < boxes.length; i++) { var sh = boxes[i].querySelector('.cv-sheet'); if (!sh) continue; sh.style.zoom = '0.05'; var w = boxes[i].clientWidth - 20; if (w <= 0) continue; sh.style.zoom = Math.min(1, w / (210 * 96 / 25.4)).toFixed(4); }
+}
+window.addEventListener('resize', function(){ if (currentRoute === 'cvkit' || currentRoute === 'record') cvZoomAll(); });
+function cvPrint(name){
+  var old = document.title; if (name) document.title = name;
+  document.body.classList.add('print-cv');
+  setTimeout(function(){ window.print(); setTimeout(function(){ document.body.classList.remove('print-cv'); document.title = old; }, 400); }, 50);
+}
+
 function renderCvkit(){
   var b = prepBody('cvkit'), B = cvBank();
   b.appendChild(erHead('cvkit', 'CV kit', 'Your master CV’s bullet bank and recipes, turned into a CV for each job family. Pick a family, adjust the bullets, check it against your facts register, then print to PDF.'));
   if (!B) { b.appendChild(el('p', {class:'intro', text:'Your CV bank lives in a private file on your PC (cv-data.js, next to the hub) and syncs to your phone through your hub account. Open Career Hub on your PC once and it appears here.'})); return; }
-  var f = S.settings.cvFam && B.recipes[S.settings.cvFam] ? S.settings.cvFam : 'PRD', st = cvState(f), C = cvCompose(B, f);
-  b.appendChild(el('div', {class:'chips', role:'group', 'aria-label':'Job family'}, CV_FAMS.map(function(x){ return el('button', {type:'button', class:'chip', 'aria-pressed': x === f ? 'true' : 'false', 'data-fid':'cv-' + x, onclick:function(){ S.settings.cvFam = x; save(); renderCvkit(); }}, [CV_FAM_NAME[x]]); })));
-  b.appendChild(el('p', {class:'tp-note', text:B.bank[f].label}));
+  var jobSt = (ps().cv || {}).JOB, hasJob = !!(jobSt && jobSt.job && jobSt.ids && jobSt.fam && jobSt.bank === B.v);
+  var f = S.settings.cvFam === 'JOB' && hasJob && !CVT.pending ? 'JOB' : (S.settings.cvFam && B.recipes[S.settings.cvFam] ? S.settings.cvFam : 'PRD'), st = cvState(f), C = cvCompose(B, f);
+  b.appendChild(cvtPanel(B, f));
+  b.appendChild(el('div', {class:'chips', role:'group', 'aria-label':'Job family'}, CV_FAMS.map(function(x){ return el('button', {type:'button', class:'chip', 'aria-pressed': x === f ? 'true' : 'false', 'data-fid':'cv-' + x, onclick:function(){ S.settings.cvFam = x; save(); renderCvkit(); }}, [CV_FAM_NAME[x]]); }).concat(hasJob ? [el('button', {type:'button', class:'chip chip-job', 'aria-pressed': f === 'JOB' ? 'true' : 'false', 'data-fid':'cv-JOB', onclick:function(){ CVT.pending = null; S.settings.cvFam = 'JOB'; save(); renderCvkit(); }}, ['This job: ' + (jobSt.job.company || 'pasted')])] : [])));
+  b.appendChild(el('p', {class:'tp-note', text: f === 'JOB' ? 'Built for ' + (st.job.title || 'this job') + (st.job.company ? ' at ' + st.job.company : '') + (st.at ? ' on ' + st.at : '') + '.' : B.bank[f].label}));
+  if (f === 'JOB') b.appendChild(cvtReport(B, st));
   var sent = S.apps.filter(function(a){ return a.cv === f && isSent(a); }), heard = sent.filter(heardBack).length;
   if (sent.length) b.appendChild(el('p', {class:'hb-verdict', text:'Sent with this CV: ' + sent.length + ', heard back from ' + heard + ' (' + pct(heard, sent.length) + ').'}));
   var wrap = el('div', {class:'cv-wrap'}), ed = el('section', {class:'cv-ed', 'aria-label':'Choose content'}), pv = el('section', {class:'cv-pv', 'aria-label':'Preview'});
   var hl = el('input', {type:'text', class:'cv-in', value:C.headline, 'data-fid':'cv-headline', 'aria-label':'Headline', oninput:function(e){ st.headline = e.target.value; saveSoon(); refresh(); }});
   var sm = el('textarea', {class:'cv-in', rows:'6', 'data-fid':'cv-summary', 'aria-label':'Summary', oninput:function(e){ st.summary = e.target.value; saveSoon(); refresh(); }}); sm.value = C.summary;
   ed.appendChild(el('h2', {text:'Headline and summary'})); ed.appendChild(hl); ed.appendChild(sm);
-  ed.appendChild(el('button', {type:'button', class:'linkish', onclick:function(){ delete st.headline; delete st.summary; st.ids = {}; st.skills = {}; save(); renderCvkit(); }}, ['Reset this family to its recipe']));
+  ed.appendChild(el('button', {type:'button', class:'linkish', onclick:function(){ if (f === 'JOB') { cvTailorRun(st.job, st.jd); return; } delete st.headline; delete st.summary; st.ids = {}; st.skills = {}; save(); renderCvkit(); }}, [f === 'JOB' ? 'Rebuild from the job description' : 'Reset this family to its recipe']));
   var group = function(title, list){
     if (!list.length) return; ed.appendChild(el('h2', {text:title}));
     list.forEach(function(x){
@@ -10311,18 +10828,20 @@ function renderCvkit(){
     var cb = el('input', {type:'checkbox', 'data-fid':'cvs-' + s.id, checked: cvSkillPicked(B, f, s.id), onchange:function(e){ st.skills[s.id] = e.target.checked; saveSoon(); refresh(); }});
     return el('label', {class:'cv-b'}, [cb, el('span', {class:'cv-bid', text:s.id}), el('span', {class:'cv-bt', text:s.label + ': ' + s.text})]); }))));
   var checksBox = el('div', {class:'cv-checks', id:'cv-checks', 'aria-live':'polite'}), sheetBox = el('div', {class:'cv-sheet-box'});
-  pv.appendChild(el('div', {class:'cv-acts'}, [
-    el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cv-print', onclick:function(){ document.body.classList.add('print-cv'); setTimeout(function(){ window.print(); setTimeout(function(){ document.body.classList.remove('print-cv'); }, 400); }, 50); }}, ['Print or save as PDF']),
+  var dl = cvtDownloadActs(f);
+  pv.appendChild(el('div', {class:'cv-acts'}, dl.concat([
+    dl.length ? null : el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cv-print', onclick:function(){ cvPrint(f === 'JOB' && st.job.company ? 'Vijay_Mistry_CV_' + st.job.company.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '') : 'Vijay_Mistry_CV'); }}, [DESK.api && DESK.api.build_cv ? 'Print' : 'Print or save as PDF']),
     el('button', {type:'button', class:'btn', 'data-fid':'cv-copy', onclick:function(e){ copyText(cvPlain(B, cvCompose(B, f)), e.currentTarget, 'Copy as text'); }}, ['Copy as text']),
-    el('button', {type:'button', class:'btn btn-quiet', 'data-fid':'cv-ai', onclick:function(e){ var Cx = cvCompose(B, f); copyText('Tailor this CV to the job description below. Keep every fact exactly as written: these numbers come from my facts register. Mirror the job’s own nouns in the bold lead-ins only where the bullet stays true. Suggest which bullets to swap in or out, and flag anything the job asks for that I can’t honestly claim.\n\nFacts register note: ' + (B.register || '') + '\n\nCV (' + CV_FAM_NAME[f] + ' family):\n' + cvPlain(B, Cx) + '\n\nOther bullets available:\n' + Object.keys(cvAllBullets(B)).filter(function(id){ return !cvPicked(B, f, id); }).map(function(id){ return id + ': ' + cvAllBullets(B)[id].text; }).join('\n') + '\n\nJob description:\n[paste it here]', e.currentTarget, 'Copy a tailoring prompt'); }}, ['Copy a tailoring prompt'])]));
+    el('button', {type:'button', class:'btn btn-quiet', 'data-fid':'cv-ai', onclick:function(e){ var Cx = cvCompose(B, f); copyText('Tailor this CV to the job description below. Keep every fact exactly as written: these numbers come from my facts register. Mirror the job’s own nouns in the bold lead-ins only where the bullet stays true. Suggest which bullets to swap in or out, and flag anything the job asks for that I can’t honestly claim.\n\nFacts register note: ' + (B.register || '') + '\n\nCV (' + CV_FAM_NAME[f] + ' family):\n' + cvPlain(B, Cx) + '\n\nOther bullets available:\n' + Object.keys(cvAllBullets(B)).filter(function(id){ return !cvPicked(B, f, id); }).map(function(id){ return id + ': ' + cvAllBullets(B)[id].text; }).join('\n') + '\n\nJob description:\n[paste it here]', e.currentTarget, 'Copy a tailoring prompt'); }}, ['Copy a tailoring prompt'])])));
+  var bl = cvtBuildLines(f); if (bl) pv.appendChild(bl);
   pv.appendChild(checksBox); pv.appendChild(sheetBox);
   function refresh(){
     var Cn = cvCompose(B, f);
     clear(checksBox).appendChild(el('ul', {}, cvChecks(B, f, Cn).map(function(c){ return el('li', {class:'cv-ck is-' + c[0], text:c[1]}); })));
-    clear(sheetBox).appendChild(cvSheet(B, Cn));
+    clear(sheetBox).appendChild(cvSheet(B, Cn)); cvZoomAll();
   }
   refresh();
-  wrap.appendChild(ed); wrap.appendChild(pv); b.appendChild(wrap);
+  wrap.appendChild(ed); wrap.appendChild(pv); b.appendChild(wrap); cvZoomAll();
 }
 
 /* ---------- trading record ---------- */
@@ -10356,13 +10875,13 @@ function renderRecord(){
     var sh = el('article', {class:'cv-sheet rec-sheet', id:'rec-sheet'}, [el('h1', {class:'cv-name', text:(B ? B.contact.name + ': ' : '') + 'trading record'}), el('p', {class:'cv-head', text:'Process summary · prepared for interviews'})]);
     REC_FIELDS.forEach(function(r){ var v = val(r[0]); if (!v || !v.trim()) return; sh.appendChild(el('h2', {text:r[1]})); sh.appendChild(el('p', {text:v})); });
     sh.appendChild(el('p', {class:'cv-sub', text:'Broker statements are available on request.'}));
-    clear(sheetBox).appendChild(sh);
+    clear(sheetBox).appendChild(sh); cvZoomAll();
   }
   draw();
   var todo = REC_FIELDS.filter(function(r){ return /\[[^\]]+\]/.test(val(r[0])); }).length;
   b.appendChild(el('div', {class:'cv-acts'}, [todo ? el('span', {class:'pitch-flag', text:todo + ' to fill'}) : null,
     el('button', {type:'button', class:'btn btn-solid', 'data-fid':'rec-print', onclick:function(){ document.body.classList.add('print-cv'); setTimeout(function(){ window.print(); setTimeout(function(){ document.body.classList.remove('print-cv'); }, 400); }, 50); }}, ['Print or save as PDF'])]));
-  b.appendChild(el('div', {class:'cv-wrap'}, [el('section', {class:'cv-ed'}, [form]), el('section', {class:'cv-pv'}, [sheetBox])]));
+  b.appendChild(el('div', {class:'cv-wrap'}, [el('section', {class:'cv-ed'}, [form]), el('section', {class:'cv-pv'}, [sheetBox])])); cvZoomAll();
   var qs = [['Walk me through your process.', 'Use Process, Sizing and Review in that order, with one recent trade as the example.'],
     ['Why trade at reduced scale since 2025?', 'Say it plainly, then the reason: the effort went into building and testing the decision platform. Mention what the audit found and that you acted on it.'],
     ['What’s your edge?', 'Name one specific, testable edge and how you’d know it had stopped working. “Discipline” isn’t an edge; a measured pattern is.'],
