@@ -1450,7 +1450,7 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
 .cv-sheet li.is-sub{margin-left:17.5pt;list-style:'–  '}
 .cv-sheet .cv-sum{margin:0;text-align:justify}
 .cv-skills{display:grid;grid-template-columns:39.4mm minmax(0,1fr);gap:2.25pt 0;margin:0}
-.cv-skills dt{font-weight:700;font-size:8.5pt;text-transform:uppercase;letter-spacing:.5pt;line-height:1.45}
+.cv-skills dt{font-weight:700;font-size:8.5pt;letter-spacing:.5pt;line-height:1.45}
 .cv-skills dd{margin:0;font-size:9.5pt}
 .cv-sheet .cv-skills{grid-template-columns:39.4mm minmax(0,1fr)}
 /* one page: the compact layout of your own one-page CVs (8.5pt type, narrower margins, education on single lines) */
@@ -10435,7 +10435,7 @@ function cvSheet(B, C){
 function cvPlain(B, C){
   var L = [B.contact.name, C.headline, B.contact.line, B.contact.links, '', 'SUMMARY', C.summary, ''];
   [['EXPERIENCE', C.exp], ['PROJECTS', C.proj]].forEach(function(g){ var xs = g[1].filter(function(x){ return x.bullets.length; }); if (!xs.length) return; L.push(g[0]); xs.forEach(function(x){ L.push(x.e.title + '    ' + x.e.dates); if (x.e.sub) L.push(x.e.sub); x.bullets.forEach(function(b){ L.push((b.sub ? '   – ' : '• ') + b.text); }); L.push(''); }); });
-  if (C.skills.length) { L.push('SKILLS & KNOWLEDGE'); C.skills.forEach(function(s){ L.push(s.label.toUpperCase() + ': ' + s.text); }); L.push(''); }
+  if (C.skills.length) { L.push('SKILLS & KNOWLEDGE'); C.skills.forEach(function(s){ L.push(s.label + ': ' + s.text); }); L.push(''); }
   L.push('EDUCATION'); (B.education || []).forEach(function(e){ if (C.pages === 1) { L.push(e.title + ' · ' + e.sub + '    ' + e.dates); return; } L.push(e.title + '    ' + e.dates); L.push(e.sub); });
   return L.join('\n');
 }
