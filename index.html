@@ -1452,6 +1452,25 @@ html.is-desktop::-webkit-scrollbar-button,html.is-desktop ::-webkit-scrollbar-bu
 .cv-skills{display:grid;grid-template-columns:39.4mm minmax(0,1fr);gap:2.25pt 0;margin:0}
 .cv-skills dt{font-weight:700;font-size:8.5pt;text-transform:uppercase;letter-spacing:.5pt;line-height:1.45}
 .cv-skills dd{margin:0;font-size:9.5pt}
+.cv-sheet .cv-skills{grid-template-columns:39.4mm minmax(0,1fr)}
+/* one page: the compact layout of your own one-page CVs (8.5pt type, narrower margins, education on single lines) */
+.cv-sheet.is-1p{padding:5.08mm 11.43mm 6.35mm;font-size:8.5pt;background-position:0 290.65mm}
+.cv-sheet.is-1p h1{font-size:16pt;margin-bottom:1.3pt}
+.cv-sheet.is-1p .cv-head,.cv-sheet.is-1p .cv-contact{font-size:8.5pt}
+.cv-sheet.is-1p h2{font-size:8.5pt;margin:8.1pt 0 3pt}
+.cv-sheet.is-1p h2.cv-h-first{margin-top:6.8pt}
+.cv-sheet.is-1p .cv-role{margin-top:5.5pt}
+.cv-sheet.is-1p h2 + .cv-role,.cv-sheet.is-1p .cv-role.is-edu{margin-top:1.7pt}
+.cv-sheet.is-1p .cv-role b{font-size:9pt}
+.cv-sheet.is-1p .cv-role span{font-size:8.5pt}
+.cv-sheet.is-1p .cv-role .cv-edu1{white-space:normal;font-size:8pt;color:#333}
+.cv-sheet.is-1p .cv-role .cv-edu1 b{color:#000}
+.cv-sheet.is-1p .cv-sub{font-size:8pt;margin-bottom:1.7pt}
+.cv-sheet.is-1p li{margin-bottom:.5pt}
+.cv-sheet.is-1p li::marker{font-size:8.5pt}
+.cv-sheet.is-1p .cv-skills{gap:1.9pt 0}
+.cv-sheet.is-1p .cv-skills dt{font-size:8pt}
+.cv-sheet.is-1p .cv-skills dd{font-size:8.5pt}
 .rec-form{display:flex;flex-direction:column;gap:10px}
 .rec-f{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
 .rec-f .cv-in{font-weight:400;color:var(--ink);margin:0}
@@ -10334,6 +10353,8 @@ function cvSkillPicked(B, f, id){ var st = cvState(f); if (f === 'JOB') return !
 function cvCompose(B, f){ return cvComposeState(B, cvState(f), f); }
 function cvComposeState(B, st, f){
   var job = f === 'JOB', base = job ? (st.fam && B.recipes[st.fam] ? st.fam : 'PRD') : f, R = B.recipes[base], seen = {}, exp = [], proj = [];
+  var one = job && st.pages === 1, mg = {};      /* one page: roles your one-page CV shows under a single line */
+  if (one) ((B.onepage || {}).merge || []).forEach(function(m){ m.entries.forEach(function(i, k){ mg[m.section + i] = {m:m, head:k === 0}; }); });
   var reg = function(t){ return t; }, RT = R.texts || {}, LANG = B.lang_row || 'K8'; cvtSetLeads(B);   /* your register rule: "proprietary book" for trading roles only */
   var on = function(id){ return job ? !!st.ids[id] : (st.ids[id] !== undefined ? st.ids[id] : R.ids.indexOf(id) >= 0); };
   var skOn = function(id){ return job ? !!st.skills[id] : (st.skills[id] !== undefined ? st.skills[id] : (R.skills.indexOf(id) >= 0 || id === LANG)); };
@@ -10344,17 +10365,19 @@ function cvComposeState(B, st, f){
     ref.slice(1).forEach(function(i){
       var key = ref[0] + i; if (seen[key]) return; seen[key] = 1;
       var e = B[ref[0]][i]; if (!e) return;
-      var bs = e.bullets.filter(function(b){ return on(b.id) && !(b.off && st.ids[b.id] !== true); });
+      var M = mg[key], pool = e.bullets;
+      if (M) { if (!M.head) return; pool = [].concat.apply([], M.m.entries.map(function(k){ return (B[M.m.section][k] || {bullets:[]}).bullets; })); e = {title:M.m.title, dates:M.m.dates, sub:M.m.sub || '', bullets:pool}; }
+      var bs = pool.filter(function(b){ return on(b.id) && !(b.off && st.ids[b.id] !== true); });
       bs = bs.map(function(b, n){ var t = (job && st.texts && st.texts[b.id]) || RT[b.id] || b.text; return {id:b.id, text:t, sub:b.sub, tags:b.tags, check:b.check, n:n}; });
       if (job) bs.sort(function(a, b){ return rk(st.rank, a.id) - rk(st.rank, b.id) || a.n - b.n; });
       else bs.sort(function(a, b){ var x = R.ids.indexOf(a.id), y = R.ids.indexOf(b.id); return (x < 0 ? 999 : x) - (y < 0 ? 999 : y) || a.n - b.n; });
-      (ref[0] === 'experience' ? exp : proj).push({e:e, bullets:bs});
+      (ref[0] === 'experience' ? exp : proj).push({e:e, bullets:bs, merged:!!M});
     });
   });
   var skills = B.skills.filter(function(s){ return skOn(s.id); });
   if (job) skills = skills.map(function(s, n){ return {s:s, n:n}; }).sort(function(a, b){ return rk(st.skillRank, a.s.id) - rk(st.skillRank, b.s.id) || a.n - b.n; }).map(function(x){ return x.s; });
   else skills = skills.map(function(s, n){ return {s:s, n:n}; }).sort(function(a, b){ var x = a.s.id === LANG ? 998 : R.skills.indexOf(a.s.id), y = b.s.id === LANG ? 998 : R.skills.indexOf(b.s.id); return (x < 0 ? 997 : x) - (y < 0 ? 997 : y) || a.n - b.n; }).map(function(x){ return x.s; });
-  return {headline: st.headline !== undefined ? st.headline : B.bank[base].headline, summary: reg(st.summary !== undefined ? st.summary : B.bank[base].summary), exp:exp, proj:proj, skills:skills};
+  return {headline: st.headline !== undefined ? st.headline : B.bank[base].headline, summary: reg(st.summary !== undefined ? st.summary : B.bank[base].summary), exp:exp, proj:proj, skills:skills, pages: one ? 1 : 2};
 }
 function cvChecks(B, f, C){
   var out = [], text = [C.headline, C.summary].concat(C.exp.concat(C.proj).reduce(function(a, x){ return a.concat(x.bullets.map(function(b){ return b.text; })); }, [])).concat(C.skills.map(function(s){ return s.text; })).join(' \n ');
@@ -10362,10 +10385,10 @@ function cvChecks(B, f, C){
   var checks = C.exp.concat(C.proj).reduce(function(a, x){ return a.concat(x.bullets.filter(function(b){ return b.check; }).map(function(b){ return b.id; })); }, []).concat(C.skills.filter(function(s){ return s.check; }).map(function(s){ return s.id; }));
   if (checks.length) out.push(['check', 'Confirm before sending: ' + checks.join(', ') + (checks.length === 1 ? ' is' : ' are') + ' marked CHECK in your master CV.']);
   var lead = C.exp[0] || C.proj[0];
-  if (lead && (lead.bullets.length < 6 || lead.bullets.length > 8)) out.push(['info', 'The lead role has ' + lead.bullets.length + ' bullets; your rule is six to eight.']);
+  if (C.pages !== 1 && lead && (lead.bullets.length < 6 || lead.bullets.length > 8)) out.push(['info', 'The lead role has ' + lead.bullets.length + ' bullets; your rule is six to eight.']);
   if (/\b(I|my|me)\b/.test(C.summary)) out.push(['info', 'The summary uses “I” or “my”. Drop pronouns for readers outside India.']);
   var chars = text.length;
-  if (chars > 7600) out.push(['warn', 'About ' + Math.round(chars / 3800 * 10) / 10 + ' pages of text: likely over your two-page limit.']);
+  if (C.pages !== 1 && chars > 7600) out.push(['warn', 'About ' + Math.round(chars / 3800 * 10) / 10 + ' pages of text: likely over your two-page limit.']);
   if (/₹\s?\d/.test(text)) out.push(['info', 'Has ₹ amounts: for readers outside India, write them in millions and add the local currency.']);
   if (!out.length) out.push(['ok', 'No issues found against your facts register.']);
   return out;
@@ -10386,7 +10409,7 @@ function cvLinked(text){
 }
 function cvLead(text, id){ var sp = cvtSplit(text); return sp[0] ? [el('strong', {text:sp[0] + ': '}), sp[1]] : [text]; }
 function cvSheet(B, C){
-  var c = B.contact, sheet = el('article', {class:'cv-sheet', id:'cv-sheet'});
+  var c = B.contact, one = C.pages === 1, sheet = el('article', {class:'cv-sheet' + (one ? ' is-1p' : ''), id:'cv-sheet'});
   sheet.appendChild(el('h1', {class:'cv-name', text:c.name}));
   sheet.appendChild(el('p', {class:'cv-head', text:C.headline}));
   sheet.appendChild(el('p', {class:'cv-contact'}, cvLinked(c.line)));
@@ -10404,14 +10427,16 @@ function cvSheet(B, C){
   block('Experience', C.exp); block('Projects', C.proj);
   if (C.skills.length) { sheet.appendChild(el('h2', {text:'Skills & Knowledge'})); sheet.appendChild(el('dl', {class:'cv-skills'}, [].concat.apply([], C.skills.map(function(s){ return [el('dt', {text:s.label}), el('dd', {text:s.text})]; })))); }
   sheet.appendChild(el('h2', {text:'Education'}));
-  (B.education || []).forEach(function(e){ sheet.appendChild(el('div', {class:'cv-role'}, [el('b', {text:e.title}), el('span', {text:e.dates})])); sheet.appendChild(el('p', {class:'cv-sub'}, cvLinked(e.sub))); });
+  (B.education || []).forEach(function(e){
+    if (one) { sheet.appendChild(el('div', {class:'cv-role is-edu'}, [el('span', {class:'cv-edu1'}, [el('b', {text:e.title}), ' · '].concat(cvLinked(e.sub))), el('span', {text:e.dates})])); return; }
+    sheet.appendChild(el('div', {class:'cv-role'}, [el('b', {text:e.title}), el('span', {text:e.dates})])); sheet.appendChild(el('p', {class:'cv-sub'}, cvLinked(e.sub))); });
   return sheet;
 }
 function cvPlain(B, C){
   var L = [B.contact.name, C.headline, B.contact.line, B.contact.links, '', 'SUMMARY', C.summary, ''];
   [['EXPERIENCE', C.exp], ['PROJECTS', C.proj]].forEach(function(g){ var xs = g[1].filter(function(x){ return x.bullets.length; }); if (!xs.length) return; L.push(g[0]); xs.forEach(function(x){ L.push(x.e.title + '    ' + x.e.dates); if (x.e.sub) L.push(x.e.sub); x.bullets.forEach(function(b){ L.push((b.sub ? '   – ' : '• ') + b.text); }); L.push(''); }); });
   if (C.skills.length) { L.push('SKILLS & KNOWLEDGE'); C.skills.forEach(function(s){ L.push(s.label.toUpperCase() + ': ' + s.text); }); L.push(''); }
-  L.push('EDUCATION'); (B.education || []).forEach(function(e){ L.push(e.title + '    ' + e.dates); L.push(e.sub); });
+  L.push('EDUCATION'); (B.education || []).forEach(function(e){ if (C.pages === 1) { L.push(e.title + ' · ' + e.sub + '    ' + e.dates); return; } L.push(e.title + '    ' + e.dates); L.push(e.sub); });
   return L.join('\n');
 }
 /* ---------- tailor the CV to one job description ----------
@@ -10520,28 +10545,52 @@ function cvtSetLeads(B){ CVT_LEADS = null; if (B && B.leads) { CVT_LEADS = {}; B
 function cvtSplit(text){ var m = /^([^:]{3,90}): ([\s\S]*)$/.exec(text); if (!m) return ['', text]; return (CVT_LEADS ? CVT_LEADS[m[1]] : /^[A-Z][^:]{2,40}$/.test(m[1])) ? [m[1], m[2]] : ['', text]; }
 function cvtRetired(B, text){ return (B.retired || []).some(function(r){ return text.indexOf(r) >= 0; }); }
 function cvtEntries(B){ var out = []; ['experience', 'projects'].forEach(function(sec){ (B[sec] || []).forEach(function(e, i){ out.push({sec:sec, i:i, e:e}); }); }); return out; }
-/* The plan for one job. fits(state) says whether the CV built from a state still fits two pages. */
-function cvtPlan(B, V, job, jd, fits){
-  var title = (job && job.title) || '', P = cvtProfile(title, jd), fam = P.fam, R = B.recipes[fam];
+/* The plan for one job. fits(state) says whether the CV built from a state still fits the page limit.
+   opt.pages 1 builds the best one-page CV (fewer bullets per role, the two Tata roles under one line);
+   opt.fam forces a family (a general CV with no job description). */
+var CVT_ONE = {skillsChars:1100, caps:{experience:[4, 3, 2], projects:[3, 1, 1, 1]}};
+function cvtPlan(B, V, job, jd, fits, opt){
+  opt = opt || {};
+  var title = (job && job.title) || '', P = cvtProfile(title, jd);
+  if (opt.fam && B.recipes[opt.fam]) P.fam = opt.fam;
+  var fam = P.fam, R = B.recipes[fam], one = opt.pages === 1, OP = B.onepage || {};
   V = V || {}; var VB = V.bullets || {}; cvtSetLeads(B);
   var RT = R.texts || {}, LANG = B.lang_row || 'K8';
   var LAST = {T6:1}, ents = cvtEntries(B), all = {}, rel = {}, lead = {}, parent = {};
+  var entOf = {}, keyIdx = {}, grp = {}, merged = {}, orderKeys = [], seenK = {};
+  ents.forEach(function(x, n){ keyIdx[x.sec + x.i] = n; grp[n] = n; x.e.bullets.forEach(function(b){ entOf[b.id] = n; }); });
+  if (one) (OP.merge || []).forEach(function(m){ var ns = m.entries.map(function(i){ return keyIdx[m.section + i]; }).filter(function(n){ return n !== undefined; }); if (ns.length > 1) { merged[ns[0]] = m; ns.forEach(function(n){ grp[n] = ns[0]; }); } });
+  R.lead.concat(['Melange', 'Trader', 'Tata', 'Console', 'Indicators', 'Projects']).forEach(function(name){ var ref = CV_LEAD[name]; if (!ref) return; ref.slice(1).forEach(function(i){ var k = ref[0] + i; if (!seenK[k] && keyIdx[k] !== undefined) { seenK[k] = 1; orderKeys.push(k); } }); });
   var btxt = function(id){ return RT[id] || all[id].text; };       /* the wording your newest CV of this family used, else the newest wording overall */
   ents.forEach(function(x){
     var bs = x.e.bullets.filter(function(b){ return !b.off; }), first = null;
     bs.forEach(function(b, n){ all[b.id] = b; if (!b.sub && (first === null || (R.ids.indexOf(first) < 0 && R.ids.indexOf(b.id) >= 0))) first = b.id;
       if (b.sub) { for (var k = n - 1; k >= 0; k--) if (!bs[k].sub) { parent[b.id] = bs[k].id; break; } } });
+    if (one) {   /* one page: a role opens with the bullet your newest CV of this family opens it with */
+      var own = bs.filter(function(b){ return !b.sub; }).map(function(b){ return b.id; }); first = null;
+      R.ids.some(function(id){ if (own.indexOf(id) >= 0) { first = id; return true; } return false; });
+      if (first === null && own.length) first = own[0];
+    }
     if (first !== null) lead[first] = 1; });
   Object.keys(all).forEach(function(id){ rel[id] = cvtRel(P, btxt(id)); });
   var picked = {}, base = {}, added = [], dropped = [], keep = {};
   Object.keys(all).forEach(function(id){ if (R.ids.indexOf(id) >= 0 || all[id].tags.indexOf('ALL') >= 0) base[id] = 1; });
   /* always on the page: each role's opening bullet and your "ALL" bullets (the ones every version of your CV carries) */
   Object.keys(base).forEach(function(id){ if (!all[id].sub && (lead[id] || (all[id].tags.indexOf('ALL') >= 0 && R.ids.indexOf(id) >= 0))) { keep[id] = 1; picked[id] = true; } });
+  if (one) {   /* one page: only the opening bullet of each role and of the first project is fixed */
+    var heads = {}; ents.forEach(function(x, n){ if (x.sec === 'experience') heads[grp[n]] = 1; });
+    orderKeys.some(function(k){ if (k.indexOf('projects') === 0) { heads[keyIdx[k]] = 1; return true; } return false; });
+    keep = {}; picked = {};
+    Object.keys(all).forEach(function(id){ if (lead[id] && !all[id].sub && heads[entOf[id]]) { keep[id] = 1; picked[id] = true; } });
+  }
   /* everything else competes for the space: relevance to this job, plus a head start for the family's own recipe */
   var score = function(id){ return rel[id] + (base[id] ? 4 : 0) + (/\d/.test(btxt(id)) ? 1 : 0); };   /* a line with a number or result gets a small edge */
+  var ridx = function(id){ var k = R.ids.indexOf(id); return k < 0 && one ? 999 : k; };
+  /* one page: your newest CV's own bullets lead; with no job description their order is kept as it is */
+  if (one) score = function(id){ return rel[id] + (R.ids.indexOf(id) >= 0 ? 4 : 0) + (P.concepts.length && /\d/.test(btxt(id)) ? 1 : 0); };
   /* a bullet from outside the recipe may join only when the job also leans towards that bullet's own family */
   var near = function(tags){ return (tags || []).some(function(t){ return t === 'ALL' || (P.scores[t] > 0 && P.scores[t] >= 0.5 * P.scores[fam]); }); };
-  var pool0 = Object.keys(all).filter(function(id){ return !keep[id] && (base[id] || (!all[id].check && rel[id] >= 5 && near(all[id].tags))); }).sort(function(a, b){ return score(b) - score(a) || R.ids.indexOf(a) - R.ids.indexOf(b); });
+  var pool0 = Object.keys(all).filter(function(id){ return !keep[id] && (base[id] || (!all[id].check && rel[id] >= 5 && near(all[id].tags))); }).sort(function(a, b){ return score(b) - score(a) || ridx(a) - ridx(b); });
   /* wording: the master line, or a line from one of your past CVs when it speaks to this job clearly better */
   var texts = {}, reworded = [];
   /* a past-CV line must not repeat what another bullet on the page already says: no number another bullet carries, and not mostly another bullet's words */
@@ -10554,6 +10603,16 @@ function cvtPlan(B, V, job, jd, fits){
       if (o === id || !picked[o]) return false;
       if (newN.some(function(n){ return mNum[o][n]; })) return true;
       return newW.length >= 3 && newW.filter(function(w){ return mWord[o][w]; }).length >= 0.5 * newW.length;
+    });
+  };
+  /* one page: a bullet that mostly repeats one already on the page is left out (three shared figures, or most of its words) */
+  var redundant = function(id){
+    var an = Object.keys(mNum[id]).filter(function(n){ return n.length >= 2; }), aw = Object.keys(mWord[id]);
+    return Object.keys(all).some(function(o){
+      if (o === id || !picked[o]) return false;
+      if (an.filter(function(n){ return mNum[o][n]; }).length >= 3) return true;
+      var k = Math.min(aw.length, Object.keys(mWord[o]).length);
+      return k > 0 && aw.filter(function(w){ return mWord[o][w]; }).length >= 0.55 * k;
     });
   };
   var wording = function(){
@@ -10582,26 +10641,43 @@ function cvtPlan(B, V, job, jd, fits){
   var extra = (B.skills || []).filter(function(s){ return R.skills.indexOf(s.id) < 0 && s.id !== LANG && !s.check && near(s.tags); }).sort(function(a, b){ return srel[b.id] - srel[a.id]; })[0];
   if (extra && srows.length && srel[extra.id] >= Math.max(6, (srel[srows[srows.length - 1]] || 0) + 3)) { srows.push(extra.id); srows.sort(function(a, b){ return (srel[b] || 0) - (srel[a] || 0); }); }
   srows = srows.slice(0, Math.max(4, R.skills.length));
-  if ((B.skills || []).some(function(s){ return s.id === LANG; })) srows.push(LANG);
+  if (one) {   /* one page: the most relevant rows, about three full rows of text */
+    var rows1 = [], tot1 = 0;
+    srows.some(function(id){ var s = (B.skills || []).filter(function(x){ return x.id === id; })[0], n = s ? s.text.length : 0; if (rows1.length >= 2 && tot1 + n > CVT_ONE.skillsChars) return true; rows1.push(id); tot1 += n; return false; });
+    srows = rows1;
+  }
+  /* one page: no separate Languages row when a chosen row already says it */
+  var langSaid = one && srows.some(function(id){ var s = (B.skills || []).filter(function(x){ return x.id === id; })[0]; return !!s && /\bEnglish\b/.test(s.text); });
+  if (!langSaid && (B.skills || []).some(function(s){ return s.id === LANG; })) srows.push(LANG);
   var state = function(){
     var ids = {}; Object.keys(all).forEach(function(id){ ids[id] = !!picked[id]; });
     var sk = {}, skr = {}; (B.skills || []).forEach(function(s){ sk[s.id] = srows.indexOf(s.id) >= 0; }); srows.forEach(function(id, i){ skr[id] = i; });
-    var tx = {}; Object.keys(all).forEach(function(id){ if (picked[id]) { var t = texts[id] || btxt(id); if (t !== all[id].text) tx[id] = t; } });   /* every wording that differs from the newest one */
-    return {fam:fam, ids:ids, skills:sk, rank:order(), skillRank:skr, texts:tx};
+    var tx = {}; Object.keys(all).forEach(function(id){ if (picked[id]) { var t = texts[id] || btxt(id); if (t !== btxt(id)) tx[id] = t; } });   /* every wording that differs from this family's own */
+    var o = {fam:fam, ids:ids, skills:sk, rank:order(), skillRank:skr, texts:tx}; if (one) o.pages = 1;
+    return o;
   };
   /* fill two pages from the top of that list; a role's first experience entry holds at most eight bullets, the others five */
-  var entOf = {}, count = {}; ents.forEach(function(x, n){ x.e.bullets.forEach(function(b){ entOf[b.id] = n; }); count[n] = 0; });
-  Object.keys(picked).forEach(function(id){ count[entOf[id]]++; });
+  var count = {}; ents.forEach(function(x, n){ count[n] = 0; });
+  Object.keys(picked).forEach(function(id){ count[grp[entOf[id]]]++; });
+  /* one page: the most bullets a role may hold goes by its place on the page (first role four, second three, Tata two, first project three, others one) */
+  var caps = OP.caps || CVT_ONE.caps, place = {};
+  orderKeys.forEach(function(k){ var g = grp[keyIdx[k]]; if (place[g] !== undefined) return; var sec = ents[g].sec, n = 0; Object.keys(place).forEach(function(q){ if (ents[q].sec === sec) n++; }); place[g] = n; });
+  var cap = function(n){ if (!one) return n <= 1 ? 8 : 5; var c = caps[ents[n].sec] || []; return place[n] !== undefined && place[n] < c.length ? c[place[n]] : 1; };
   var firstExp = 0, st, misses = 0;
   pool0.forEach(function(id){
-    if (misses >= 4) return;
+    if (misses >= (one ? 6 : 4)) return;
     if (all[id].sub && !picked[parent[id]]) return;
-    if (count[entOf[id]] >= (entOf[id] <= 1 ? 8 : 5)) return;   /* Melange and trading roles hold up to eight bullets, the rest five */
+    var g = grp[entOf[id]];
+    if (count[g] >= cap(g)) return;   /* two pages: Melange and trading roles hold up to eight bullets, the rest five */
+    if (one && redundant(id)) return;
     picked[id] = true; wording();
     if (fits && !fits(state())) { picked[id] = false; misses++; return; }
-    count[entOf[id]]++;
+    count[g]++;
   });
   wording(); st = state();
+  /* if Word finds the page a line too long, it drops from the front of this list: least relevant first, never a role's opening bullet */
+  st.trim = Object.keys(all).filter(function(id){ return picked[id] && !keep[id] && !LAST[id] && !Object.keys(parent).some(function(s){ return parent[s] === id && picked[s]; }); })
+    .sort(function(a, b){ return score(a) - score(b) || st.rank[b] - st.rank[a]; });
   Object.keys(all).forEach(function(id){ if (picked[id] && !base[id]) added.push(id); if (!picked[id] && base[id]) dropped.push(id); });
   reworded = Object.keys(texts);
   dropped = dropped.filter(function(id){ return all[id]; });
@@ -10654,14 +10730,16 @@ function cvtFetchJd(job){
     var x = (d.jobs || []).filter(function(q){ return q.id === jid; })[0]; return x ? (x.descriptionPlain || cvtText(x.descriptionHtml)) : Promise.reject('gone'); });
   return Promise.reject('paste');
 }
-/* does the CV built from this state fit two A4 pages? Measured on a hidden copy laid out at the printed width. */
+/* does the CV built from this state fit its page limit (two A4 pages, or one)? Measured on a hidden copy laid out at the printed width. */
+var CV_ONE_W = 187.14, CV_ONE_H = 285.6;   /* text area of the one-page sheet, in mm */
 function cvtFitter(B){
   var host = document.createElement('div'); host.setAttribute('aria-hidden', 'true');
   host.style.cssText = 'position:absolute;left:-9999px;top:0;width:182mm;visibility:hidden;pointer-events:none';
-  var limit = (2 * 274.2 - 14) * 96 / 25.4;
   return function(st){
     if (!host.parentNode) document.body.appendChild(host);
-    var sheet = cvSheet(B, cvComposeState(B, st, 'JOB')); sheet.removeAttribute('id'); sheet.style.padding = '0'; sheet.style.width = '182mm'; sheet.style.minHeight = '0'; sheet.style.zoom = '1';
+    var one = st.pages === 1, w = (one ? CV_ONE_W : 182) + 'mm', limit = (one ? CV_ONE_H - 2.5 : 2 * 274.2 - 14) * 96 / 25.4;
+    host.style.width = w;
+    var sheet = cvSheet(B, cvComposeState(B, st, 'JOB')); sheet.removeAttribute('id'); sheet.style.padding = '0'; sheet.style.width = w; sheet.style.minHeight = '0'; sheet.style.zoom = '1';
     clear(host).appendChild(sheet);
     var ok = sheet.offsetHeight <= limit;
     clear(host);
@@ -10672,30 +10750,35 @@ function cvTailorStart(j){
   CVT.pending = {id:j.id || '', company:j.company || '', title:j.title || '', location:j.location || '', url:j.url || ''}; CVT.note = ''; CVT.fetching = false; CVT.build = null;
   location.hash = '#/cvkit';
 }
-function cvTailorRun(job, jd){
-  var B = cvBank(); if (!B) return;
-  jd = String(jd || '').trim();
-  if (jd.length < 200) { CVT.note = 'That is too short to be a job description. Paste the full text of the listing.'; renderCvkit(); return; }
-  var fit = cvtFitter(B), st = cvtPlan(B, cvVariants(B), job, jd, fit), p = ps();
+/* opt.pages 1 = one page. opt.general = the best one-page version of a family's CV, with no job description (opt.fam says which family). */
+function cvTailorRun(job, jd, opt){
+  var B = cvBank(); if (!B) return; opt = opt || {};
+  var general = !!(opt.general && opt.fam && B.recipes[opt.fam]);
+  jd = general ? '' : String(jd || '').trim();
+  if (!general && jd.length < 200) { CVT.note = 'That is too short to be a job description. Paste the full text of the listing.'; renderCvkit(); return; }
+  var fit = cvtFitter(B), st = cvtPlan(B, cvVariants(B), job, jd, fit, {pages: opt.pages === 1 ? 1 : 2, fam: general ? opt.fam : null}), p = ps();
   st.job = {id:job.id || '', company:job.company || '', title:job.title || '', location:job.location || '', url:job.url || ''};
+  if (general) st.general = true;
   st.jd = jd.slice(0, 12000); st.at = new Date().toISOString().slice(0, 10); st.bank = B.v;
   p.cv = p.cv || {}; p.cv.JOB = st; S.settings.cvFam = 'JOB'; CVT.pending = null; CVT.note = ''; CVT.build = null;
   save(); renderCvkit();
 }
 /* the box at the top of the CV kit: one job in, one CV out */
 function cvtPanel(B, f){
-  var st = (ps().cv || {}).JOB, cur = CVT.pending || (st && st.job) || {company:'', title:'', location:'', url:'', id:''};
+  var st = (ps().cv || {}).JOB, cur = CVT.pending || (st && !st.general && st.job) || {company:'', title:'', location:'', url:'', id:''};
   var co = el('input', {type:'text', class:'cv-in', value:cur.company || '', placeholder:'Company', 'data-fid':'cvt-company', 'aria-label':'Company'});
   var ti = el('input', {type:'text', class:'cv-in', value:cur.title || '', placeholder:'Job title', 'data-fid':'cvt-title', 'aria-label':'Job title'});
   var jd = el('textarea', {class:'cv-in', rows:'6', placeholder:'Paste the full job description here', 'data-fid':'cvt-jd', 'aria-label':'Job description'});
   jd.value = CVT.pending ? (CVT.pending.jd || '') : ((st && st.jd) || '');
   var job = function(){ return {id:cur.id || '', company:co.value.trim(), title:ti.value.trim(), location:cur.location || '', url:cur.url || ''}; };
+  var run = function(pages){ if (!co.value.trim() || !ti.value.trim()) { CVT.note = 'Add the company and the job title first: the title decides which of your CV families fits.'; if (CVT.pending) CVT.pending.jd = jd.value; renderCvkit(); return; } cvTailorRun(job(), jd.value, {pages:pages}); };
   var box = el('section', {class:'cvt', 'aria-label':'Build a CV for one job'}, [
     el('h2', {text:'Build a CV for one job'}),
     el('p', {class:'tp-note', text:'Paste a job description, or press “Tailor CV” on any job in the Jobs list. The hub reads what the job asks for, then picks your bullets, your own past wording and your skills rows to answer it, in your master layout. Every line is word for word from a CV you sent; nothing is made up.'}),
     el('div', {class:'cvt-two'}, [co, ti]), jd,
     el('div', {class:'cv-acts'}, [
-      el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cvt-run', onclick:function(){ if (!co.value.trim() || !ti.value.trim()) { CVT.note = 'Add the company and the job title first: the title decides which of your CV families fits.'; if (CVT.pending) CVT.pending.jd = jd.value; renderCvkit(); return; } cvTailorRun(job(), jd.value); }}, ['Build CV for this job']),
+      el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cvt-run', onclick:function(){ run(2); }}, ['Build CV for this job']),
+      el('button', {type:'button', class:'btn', 'data-fid':'cvt-run1', title:'The best one-page CV for this job: fewer bullets, chosen for this job, in the compact layout of your own one-page CV', onclick:function(){ run(1); }}, ['Build a one-page CV']),
       cur.url ? el('a', {class:'btn btn-quiet', href:cur.url, target:'_blank', rel:'noopener', text:'Open the listing'}) : null,
       CVT.fetching ? el('span', {class:'pitch-flag', text:'Reading the job description…'}) : null]),
     CVT.note ? el('p', {class:'cv-ck is-check', role:'status', text:CVT.note}) : null]);
@@ -10719,6 +10802,13 @@ function cvtPanel(B, f){
 function cvtReport(B, st){
   var r = st.rep || {}, all = cvAllBullets(B), L = [], box = el('section', {class:'cvt-rep', 'aria-label':'How this CV answers the job'});
   var nm = function(ids){ return ids.join(', '); };
+  var one = st.pages === 1, onCv = Object.keys(st.ids || {}).filter(function(id){ return st.ids[id]; }).length;
+  if (one) L.push(['info', 'One page, in the compact layout of your own one-page CV' + ((B.onepage || {}).from ? ' (' + B.onepage.from.replace(/_/g, ' ') + ')' : '') + ': 8.5 pt type, narrower margins, the two Tata roles under one line, education on single lines. ' + onCv + ' bullets fit. The grey line near the foot of the preview is the end of the page.']);
+  if (st.general) {
+    L.push(['ok', 'No job description: these are the bullets your newest ' + (CV_FAM_NAME[st.fam] || st.fam) + ' CV (' + ((B.bank[st.fam] || {}).from || 'sent CVs').replace(/_/g, ' ') + ') leads with, in its order and its wording. Tick or untick bullets on the left to change it.']);
+    box.appendChild(el('ul', {class:'cvt-lines'}, L.map(function(c){ return el('li', {class:'cv-ck is-' + c[0], text:c[1]}); })));
+    return box;
+  }
   L.push(['ok', 'Built from your newest ' + (CV_FAM_NAME[st.fam] || st.fam) + ' CV (' + ((B.bank[st.fam] || {}).from || 'sent CVs').replace(/_/g, ' ') + '). It answers about ' + (r.score || 0) + '% of what the description asks for, weighted by how much the job stresses each thing.']);
   if (r.years) L.push([r.years >= 5 ? 'warn' : 'info', 'The description asks for ' + r.years + '+ years of experience.' + (r.years >= 5 ? ' That is usually a blocker for you.' : '')]);
   if (r.top && r.top.length) L.push(['info', 'What this job wants most, and the line that proves it: ' + r.top.map(function(t){ return t.k + (t.ids.length ? ' (' + nm(t.ids) + ')' : ' (no line yet)'); }).join(' · ') + '. Bullets that answer these sit first in each role.']);
@@ -10727,7 +10817,7 @@ function cvtReport(B, st){
   if (none.length) L.push(['warn', 'Asked for, and nothing in your CV covers it: ' + none.map(function(m){ return m.k; }).join(' · ') + '. Leave these out unless they are true, and prepare an answer for the interview.']);
   var ch = [];
   if (r.added && r.added.length) ch.push('added ' + nm(r.added));
-  if (r.dropped && r.dropped.length) ch.push('left out ' + nm(r.dropped) + ' to keep two pages');
+  if (r.dropped && r.dropped.length) ch.push(one ? 'left out ' + r.dropped.length + ' of its bullets to keep one page' : 'left out ' + nm(r.dropped) + ' to keep two pages');
   var rw = (r.reworded || []).filter(function(id){ return st.ids[id] && st.texts && st.texts[id]; });
   if (rw.length) ch.push('swapped in a different sent-CV wording for ' + nm(rw));
   if (ch.length) L.push(['info', 'Against your ' + (CV_FAM_NAME[st.fam] || st.fam) + ' recipe: ' + ch.join('; ') + '.']);
@@ -10743,7 +10833,7 @@ function cvtReport(B, st){
 /* desktop only: the CV on screen as a PDF and a Word file in your master layout, checked line by line against your facts, saved to Downloads */
 function cvtBuild(f, reword){
   var B = cvBank(), st = cvState(f), C = cvCompose(B, f), job = f === 'JOB', base = job ? st.fam : f, secs = [], edits = {bullets:{}};
-  [['experience', C.exp], ['projects', C.proj]].forEach(function(g){ g[1].forEach(function(x){ if (x.bullets.length) secs.push({section:g[0], title:x.e.title, dates:x.e.dates, sub:x.e.sub, ids:x.bullets.map(function(b){ return b.id; })}); }); });
+  [['experience', C.exp], ['projects', C.proj]].forEach(function(g){ g[1].forEach(function(x){ if (x.bullets.length) secs.push({section:g[0], title:x.e.title, dates:x.e.dates, sub:x.e.sub, merged:!!x.merged, ids:x.bullets.map(function(b){ return b.id; })}); }); });
   var wording = {}, allB = cvAllBullets(B);
   C.exp.concat(C.proj).forEach(function(x){ x.bullets.forEach(function(b){ if (allB[b.id] && b.text !== allB[b.id].text) wording[b.id] = b.text; }); });
   if (st.headline !== undefined && st.headline !== B.bank[base].headline) edits.headline = st.headline;
@@ -10751,7 +10841,7 @@ function cvtBuild(f, reword){
   CVT.build = {state:'running', f:f, lines:[['info', reword ? 'Asking Gemini, then building. This takes two to three minutes; you can keep working.' : 'Building the PDF and Word file…']]};
   renderCvkit();
   DESK.api.build_cv({job: job ? st.job : {id:'', company:CV_FAM_NAME[f], title:'General CV', location:'', url:''}, jd: job ? st.jd : '', variant:base, sections:secs,
-      skills:C.skills.map(function(s){ return s.id; }), edits:edits, wording:wording, reword:!!(reword && job)}).then(function(){
+      skills:C.skills.map(function(s){ return s.id; }), edits:edits, wording:wording, pages:C.pages === 1 ? 1 : 2, trim:(job && st.trim) || [], reword:!!(reword && job && st.jd)}).then(function(){
     clearInterval(CVT.timer);
     CVT.timer = setInterval(function(){
       DESK.api.build_status().then(function(s){
@@ -10777,7 +10867,7 @@ function cvtDownloadActs(f){
   var busy = CVT.build && CVT.build.state === 'running';
   return [
     el('button', {type:'button', class:'btn btn-solid', disabled:busy, 'data-fid':'cvt-word', title:'Builds this CV as a PDF and a Word file in your master layout and saves both to your Downloads folder', onclick:function(){ cvtBuild(f, false); }}, ['Download PDF and Word']),
-    f === 'JOB' ? el('button', {type:'button', class:'btn', disabled:busy, 'data-fid':'cvt-gemini', title:'Gemini re-words up to three bullets, the headline and the summary in the job’s own words. Every change is checked against your facts; anything that adds a number, a name or a claim is thrown away. Takes two to three minutes.', onclick:function(){ cvtBuild(f, true); }}, ['Re-word with Gemini, then download']) : null,
+    f === 'JOB' && !cvState(f).general ? el('button', {type:'button', class:'btn', disabled:busy, 'data-fid':'cvt-gemini', title:'Gemini re-words up to three bullets, the headline and the summary in the job’s own words. Every change is checked against your facts; anything that adds a number, a name or a claim is thrown away. Takes two to three minutes.', onclick:function(){ cvtBuild(f, true); }}, ['Re-word with Gemini, then download']) : null,
     CVT.build && CVT.build.saved && CVT.build.f === f ? el('button', {type:'button', class:'btn btn-quiet', onclick:function(){ DESK.api.open_cv_folder(); }}, ['Show the file']) : null];
 }
 function cvtBuildLines(f){
@@ -10788,10 +10878,12 @@ function cvZoomAll(){
   for (var i = 0; i < boxes.length; i++) { var sh = boxes[i].querySelector('.cv-sheet'); if (!sh) continue; sh.style.zoom = '0.05'; var w = boxes[i].clientWidth - 20; if (w <= 0) continue; sh.style.zoom = Math.min(1, w / (210 * 96 / 25.4)).toFixed(4); }
 }
 window.addEventListener('resize', function(){ if (currentRoute === 'cvkit' || currentRoute === 'record') cvZoomAll(); });
-function cvPrint(name){
+function cvPrint(name, one){
   var old = document.title; if (name) document.title = name;
+  var pg = document.getElementById('cv-page-1p'); if (pg) pg.parentNode.removeChild(pg);
+  if (one) { pg = document.createElement('style'); pg.id = 'cv-page-1p'; pg.textContent = '@media print{@page{size:A4;margin:5.08mm 11.43mm 6.35mm;@bottom-center{content:none}}}'; document.head.appendChild(pg); }
   document.body.classList.add('print-cv');
-  setTimeout(function(){ window.print(); setTimeout(function(){ document.body.classList.remove('print-cv'); document.title = old; }, 400); }, 50);
+  setTimeout(function(){ window.print(); setTimeout(function(){ document.body.classList.remove('print-cv'); document.title = old; var q = document.getElementById('cv-page-1p'); if (q) q.parentNode.removeChild(q); }, 400); }, 50);
 }
 
 function renderCvkit(){
@@ -10801,8 +10893,12 @@ function renderCvkit(){
   var jobSt = (ps().cv || {}).JOB, hasJob = !!(jobSt && jobSt.job && jobSt.ids && jobSt.fam && jobSt.bank === B.v);
   var f = S.settings.cvFam === 'JOB' && hasJob && !CVT.pending ? 'JOB' : (S.settings.cvFam && B.recipes[S.settings.cvFam] ? S.settings.cvFam : 'PRD'), st = cvState(f), C = cvCompose(B, f);
   b.appendChild(cvtPanel(B, f));
-  b.appendChild(el('div', {class:'chips', role:'group', 'aria-label':'Job family'}, CV_FAMS.map(function(x){ return el('button', {type:'button', class:'chip', 'aria-pressed': x === f ? 'true' : 'false', 'data-fid':'cv-' + x, onclick:function(){ S.settings.cvFam = x; save(); renderCvkit(); }}, [CV_FAM_NAME[x]]); }).concat(hasJob ? [el('button', {type:'button', class:'chip chip-job', 'aria-pressed': f === 'JOB' ? 'true' : 'false', 'data-fid':'cv-JOB', onclick:function(){ CVT.pending = null; S.settings.cvFam = 'JOB'; save(); renderCvkit(); }}, ['This job: ' + (jobSt.job.company || 'pasted')])] : [])));
-  b.appendChild(el('p', {class:'tp-note', text: f === 'JOB' ? 'Built for ' + (st.job.title || 'this job') + (st.job.company ? ' at ' + st.job.company : '') + (st.at ? ' on ' + st.at : '') + '.' : B.bank[f].label}));
+  b.appendChild(el('div', {class:'chips', role:'group', 'aria-label':'Job family'}, CV_FAMS.map(function(x){ return el('button', {type:'button', class:'chip', 'aria-pressed': x === f ? 'true' : 'false', 'data-fid':'cv-' + x, onclick:function(){ S.settings.cvFam = x; save(); renderCvkit(); }}, [CV_FAM_NAME[x]]); }).concat(hasJob ? [el('button', {type:'button', class:'chip chip-job', 'aria-pressed': f === 'JOB' ? 'true' : 'false', 'data-fid':'cv-JOB', onclick:function(){ CVT.pending = null; S.settings.cvFam = 'JOB'; save(); renderCvkit(); }}, [jobSt.general ? 'One page: ' + (CV_FAM_NAME[jobSt.fam] || jobSt.fam) : 'This job: ' + (jobSt.job.company || 'pasted')])] : [])));
+  var isOne = f === 'JOB' && st.pages === 1;
+  b.appendChild(el('div', {class:'chips', role:'group', 'aria-label':'CV length'}, [
+    el('button', {type:'button', class:'chip', 'aria-pressed': isOne ? 'false' : 'true', 'data-fid':'cv-len2', onclick:function(){ if (!isOne) return; if (st.general) { S.settings.cvFam = st.fam; save(); renderCvkit(); } else cvTailorRun(st.job, st.jd, {pages:2}); }}, ['Two pages']),
+    el('button', {type:'button', class:'chip', 'aria-pressed': isOne ? 'true' : 'false', 'data-fid':'cv-len1', title:'The best one-page version: fewer bullets, in the compact layout of your own one-page CV', onclick:function(){ if (isOne) return; if (f === 'JOB') cvTailorRun(st.job, st.jd, {pages:1}); else cvTailorRun({id:'', company:CV_FAM_NAME[f], title:'General CV', location:'', url:''}, '', {pages:1, general:true, fam:f}); }}, ['One page'])]));
+  b.appendChild(el('p', {class:'tp-note', text: f === 'JOB' ? (st.general ? 'The best one-page version of your ' + (CV_FAM_NAME[st.fam] || st.fam) + ' CV' + (st.at ? ', built on ' + st.at : '') + '.' : 'Built for ' + (st.job.title || 'this job') + (st.job.company ? ' at ' + st.job.company : '') + (st.at ? ' on ' + st.at : '') + (isOne ? ', on one page' : '') + '.') : B.bank[f].label}));
   if (f === 'JOB') b.appendChild(cvtReport(B, st));
   var sent = S.apps.filter(function(a){ return a.cv === f && isSent(a); }), heard = sent.filter(heardBack).length;
   if (sent.length) b.appendChild(el('p', {class:'hb-verdict', text:'Sent with this CV: ' + sent.length + ', heard back from ' + heard + ' (' + pct(heard, sent.length) + ').'}));
@@ -10810,7 +10906,7 @@ function renderCvkit(){
   var hl = el('input', {type:'text', class:'cv-in', value:C.headline, 'data-fid':'cv-headline', 'aria-label':'Headline', oninput:function(e){ st.headline = e.target.value; saveSoon(); refresh(); }});
   var sm = el('textarea', {class:'cv-in', rows:'6', 'data-fid':'cv-summary', 'aria-label':'Summary', oninput:function(e){ st.summary = e.target.value; saveSoon(); refresh(); }}); sm.value = C.summary;
   ed.appendChild(el('h2', {text:'Headline and summary'})); ed.appendChild(hl); ed.appendChild(sm);
-  ed.appendChild(el('button', {type:'button', class:'linkish', onclick:function(){ if (f === 'JOB') { cvTailorRun(st.job, st.jd); return; } delete st.headline; delete st.summary; st.ids = {}; st.skills = {}; save(); renderCvkit(); }}, [f === 'JOB' ? 'Rebuild from the job description' : 'Reset this family to its recipe']));
+  ed.appendChild(el('button', {type:'button', class:'linkish', onclick:function(){ if (f === 'JOB') { cvTailorRun(st.job, st.jd, {pages:st.pages, general:st.general, fam:st.fam}); return; } delete st.headline; delete st.summary; st.ids = {}; st.skills = {}; save(); renderCvkit(); }}, [f === 'JOB' ? (st.general ? 'Rebuild the one-page CV' : 'Rebuild from the job description') : 'Reset this family to its recipe']));
   var group = function(title, list){
     if (!list.length) return; ed.appendChild(el('h2', {text:title}));
     list.forEach(function(x){
@@ -10830,7 +10926,7 @@ function renderCvkit(){
   var checksBox = el('div', {class:'cv-checks', id:'cv-checks', 'aria-live':'polite'}), sheetBox = el('div', {class:'cv-sheet-box'});
   var dl = cvtDownloadActs(f);
   pv.appendChild(el('div', {class:'cv-acts'}, dl.concat([
-    dl.length ? null : el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cv-print', onclick:function(){ cvPrint(f === 'JOB' && st.job.company ? 'Vijay_Mistry_CV_' + st.job.company.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '') : 'Vijay_Mistry_CV'); }}, [DESK.api && DESK.api.build_cv ? 'Print' : 'Print or save as PDF']),
+    dl.length ? null : el('button', {type:'button', class:'btn btn-solid', 'data-fid':'cv-print', onclick:function(){ cvPrint(f === 'JOB' && st.job.company ? 'Vijay_Mistry_CV_' + st.job.company.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '') : 'Vijay_Mistry_CV', isOne); }}, [DESK.api && DESK.api.build_cv ? 'Print' : 'Print or save as PDF']),
     el('button', {type:'button', class:'btn', 'data-fid':'cv-copy', onclick:function(e){ copyText(cvPlain(B, cvCompose(B, f)), e.currentTarget, 'Copy as text'); }}, ['Copy as text']),
     el('button', {type:'button', class:'btn btn-quiet', 'data-fid':'cv-ai', onclick:function(e){ var Cx = cvCompose(B, f); copyText('Tailor this CV to the job description below. Keep every fact exactly as written: these numbers come from my facts register. Mirror the job’s own nouns in the bold lead-ins only where the bullet stays true. Suggest which bullets to swap in or out, and flag anything the job asks for that I can’t honestly claim.\n\nFacts register note: ' + (B.register || '') + '\n\nCV (' + CV_FAM_NAME[f] + ' family):\n' + cvPlain(B, Cx) + '\n\nOther bullets available:\n' + Object.keys(cvAllBullets(B)).filter(function(id){ return !cvPicked(B, f, id); }).map(function(id){ return id + ': ' + cvAllBullets(B)[id].text; }).join('\n') + '\n\nJob description:\n[paste it here]', e.currentTarget, 'Copy a tailoring prompt'); }}, ['Copy a tailoring prompt'])])));
   var bl = cvtBuildLines(f); if (bl) pv.appendChild(bl);
