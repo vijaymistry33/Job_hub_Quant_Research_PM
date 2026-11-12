@@ -10770,7 +10770,8 @@ function cvtPanel(B, f){
   var ti = el('input', {type:'text', class:'cv-in', value:cur.title || '', placeholder:'Job title', 'data-fid':'cvt-title', 'aria-label':'Job title'});
   var jd = el('textarea', {class:'cv-in', rows:'6', placeholder:'Paste the full job description here', 'data-fid':'cvt-jd', 'aria-label':'Job description'});
   jd.value = CVT.pending ? (CVT.pending.jd || '') : ((st && st.jd) || '');
-  var job = function(){ return {id:cur.id || '', company:co.value.trim(), title:ti.value.trim(), location:cur.location || '', url:cur.url || ''}; };
+  /* a different company or title typed here is a different job: the earlier job's location, listing address and id must not follow it */
+  var job = function(){ var same = co.value.trim() === (cur.company || '') && ti.value.trim() === (cur.title || ''); return {id:same ? cur.id || '' : '', company:co.value.trim(), title:ti.value.trim(), location:same ? cur.location || '' : '', url:same ? cur.url || '' : ''}; };
   var run = function(pages){ if (!co.value.trim() || !ti.value.trim()) { CVT.note = 'Add the company and the job title first: the title decides which of your CV families fits.'; if (CVT.pending) CVT.pending.jd = jd.value; renderCvkit(); return; } cvTailorRun(job(), jd.value, {pages:pages}); };
   var box = el('section', {class:'cvt', 'aria-label':'Build a CV for one job'}, [
     el('h2', {text:'Build a CV for one job'}),
